@@ -31,3 +31,6 @@ npm-debug.log
 
 # Cache MAC
 .DS_Store
+
+# ENV
+.env
