@@ -5,6 +5,7 @@ const userSchema = new Schema({
   name: { type:String, required:true },
   nickname: { type:String, required:true },
   photoUrl: { type:String, default:"" },
+  // CHECK USE ARRAY
   position: { type:{ lat: Number,
                      lon: Number },
                 required: true },

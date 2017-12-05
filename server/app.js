@@ -12,10 +12,11 @@ const cors = require('cors');
 const app = express();
 
 // Routes
-const categories = require('./routes/categories.routes.js');
-const chat = require('./routes/chat.routes.js');
-const plan = require('./routes/plan.routes.js');
-const user = require('./routes/user.routes.js');
+const categories = require('./routes/categories.routes');
+const auth = require('./routes/auth.routes');
+const chat = require('./routes/chat.routes');
+const plan = require('./routes/plan.routes');
+const user = require('./routes/user.routes');
 mongoose.connect(process.env.DBURL).then(() =>{
   console.log(`Connected to DB: ${process.env.DBURL}`);
 }).catch(err => console.log(err));
@@ -51,7 +52,11 @@ app.use(session({
   store: new MongoStore( { mongooseConnection: mongoose.connection })
 }));
 
+// Require Passport Login
+require('./passport')(app);
+
 // Routes
+app.use('/api', auth);
 app.use('/api', categories);
 app.use('/api', chat);
 app.use('/api', plan);
