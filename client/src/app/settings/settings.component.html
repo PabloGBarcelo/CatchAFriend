@@ -1,0 +1,14 @@
+<p>
+  settings works!
+</p>
+<div *ngIf="this.auth.getUser()">
+  <p> Nos vemos pronto {{ this.auth.getUser().nickname }}</p>
+</div>
+<button (click)="logout()">LOGOUT!</button>
+<ul>
+  <li><a [routerLink]="['/portal']">Plans</a></li>
+  <li><a [routerLink]="['/myplans']">My Plans</a></li>
+  <li><a [routerLink]="['/mychats']">My Chats</a></li>
+  <li><a [routerLink]="['/lasthour']">Last Hour</a></li>
+  <li class="selected">Settings</li>
+</ul>

@@ -1,6 +1,148 @@
 const express = require('express');
+const Plan = require('../models/Plan.model');
 const Routes = express.Router();
 
-// Do what you have...
+Routes.post('/newplan', (req, res, next) => { // CHECKED
+  console.log(req.body);
+  const { title,
+          position,
+          _owner,
+          datePlan,
+          _usersRequest,
+          _category,
+          _dislikesId,
+          _rejectedId,
+          gender_allowed,
+          description,
+          photo,
+          zone,
+          status,
+          maxPeople
+         } = req.body;
+  if (!title || !position || !datePlan || !_category || !description || !photo ) {
+    console.log("FAIL");
+    res.status(400).json({ message: 'Please, provide all fields' });
+    return;
+  }
+  // No plans in the past
+  if (datePlan < Date.now()){
+    res.status(400).json({ message: 'Back to the past!? Incredible!' });
+    return;
+  }
+  // No plans without 2 hours (check plan rush) (last minute plan)
+  if (Math.abs(datePlan - Date.now()) /  3.6e6 < 2){
+    res.status(400).json({ message: 'You cant make normal plan with less than two hour' });
+    return;
+  }
+  // Need to find if exist a plan of this user inside the hour passed
+    Plan.findOne({"datePlan": {"$gte": datePlan, "$lt": datePlan, "$eq": datePlan}}, '_id')
+      .then(onePlan => {
+        if (onePlan) {
+          res.status(400).json({ message: 'You cant be in 2 plans on same hour! Are you god?' });
+          return;
+        }
+        const newPlan = new Plan({
+          title,
+          position,
+          _owner,
+          datePlan,
+          _usersRequest,
+          _category,
+          _dislikesId,
+          _rejectedId,
+          gender_allowed,
+          description,
+          photo,
+          zone,
+          status,
+          maxPeople
+        });
+        return newPlan.save();
+      })
+      .then(newPlan => { res.status(200).json(newPlan); })
+      .catch(e => {
+          console.log(e);
+          res.status(500).json({ message: 'Something went wrong' });
+      });
+    });
+    Routes.get('/plan', (req, res) => { // CHECKED
+      // Get all plans without filter (categories and subcategories)
+      // MVP Later : db.collection.count()
+      // db.collection.find().skip(20).limit(10) cursor.count()
+      // Plan.find({ $or:[{ "_userRequest": { "$ne": group._id }, "_dislikesId": { "$ne": group._id }}])
+      Plan.find({})
+              .then(data => { res.status(200).json(data); })
+              .catch(err => { console.log(err);res.status(500).json({ message: 'Error listing'}); });
+    });
+
+    Routes.get('/plan/:id', (req, res, next) => { // CHECKED
+      // Get plan by id
+      Plan.findById(req.params.id)
+              .then(data => { res.status(200).json(data);})
+              .catch(err => { res.status(500).json({ message: 'Error listing'});});
+    });
+
+    Routes.post('/plan/:id', (req, res, next) => { // CHECKED
+      // Get categorie by Id and Update
+      Plan.findByIdAndUpdate(req.params.id,req.body)
+              .then(data => { res.status(200).json(data); })
+              .catch(err => { res.status(500).json({ message: 'Error updating'});});
+    });
+
+    Routes.delete('/plan/:id', (req, res, next) => { // CHECKED
+      // Remove category
+      Plan.findByIdAndRemove(req.params.id)
+              .then(itemRemoved => { res.status(200).json(); })
+              .catch(err => res.status(500).json({ message: 'Error removing'}));
+    });
+
+    // When somebody make like
+    Routes.post('/plan/:planId/like/:userId', (req, res, next) => { // CHECKED
+      Plan.findOneAndUpdate({"_id":req.params.planId,
+                            "_usersRequest": { $nin:[ req.params.userId ] },
+                            "_rejectedId": { $nin:[ req.params.userId ] },
+                            "_dislikesId": { $nin:[ req.params.userId ] },
+                             "_acceptRequest": { $nin:[ req.params.userId ] }},
+                            {$push: {"_usersRequest": req.params.userId}})
+          .then(planLiked => {
+            if (!planLiked)
+              res.status(500).json({ message: 'Plan executed in the past'});
+            else
+              res.status(200).json("Plan Liked"); })
+          .catch(err => res.status(500).json({ message: 'Error Liking plan'}));
+    });
+
+    // When somebody make dislike
+    Routes.post('/plan/:planId/dislike/:userId', (req, res, next) => { // CHECKED
+      Plan.findOneAndUpdate({  "_id":req.params.planId,
+                               "_usersRequest": { $nin:[ req.params.userId ] },
+                               "_rejectedId": { $nin:[ req.params.userId ] },
+                               "_dislikesId": { $nin:[ req.params.userId ] },
+                               "_acceptRequest": { $nin:[ req.params.userId ] }},
+                               { $push: {"_dislikesId": req.params.userId }})
+          .then(planDisliked => {
+            if (!planDisliked)
+              res.status(500).json({ message: 'Plan executed in the past'});
+            else
+              res.status(200).json("Plan Disliked"); })
+          .catch(err => res.status(500).json({ message: 'Error disliking plan'}));
+
+    });
+
+    // When a user accept a plan
+    Routes.post('/plan/:planId/accept/:userId', (req, res, next) => { // CHECKED
+      Plan.findOneAndUpdate({"_id":req.params.planId, "_usersRequest": req.params.userId },
+                            { $push: {"_acceptRequest": req.params.userId },
+                              $pull:{ "_usersRequest": req.params.userId }})
+          .then(planAccepted => {
+            if (!planAccepted)
+              res.status(500).json({ message: 'No plan for Accept'});
+            else
+              res.status(200).json("Plan Accepted"); })
+          .catch(err => res.status(500).json({ message: 'Error Accepting plan'}));
+
+    });
+
+
 
 module.exports = Routes;

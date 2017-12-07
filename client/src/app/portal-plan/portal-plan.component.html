@@ -1,0 +1,50 @@
+<div>
+
+  <div *ngIf="this.plans[this.x]">
+    <div class="photoPlan">
+      <img [src]="this.plans[this.x].photo[0]">
+    </div>
+    <div class="dataHeader">
+      <div class="dataDate">
+        {{ this.plans[this.x].datePlan }}
+      </div>
+      <div class="numberPeople">
+        {{ this.plans[this.x].maxPeople - this.plans[this.x]._acceptRequest.length}} ({{ this.plans[this.x].maxPeople}}) img persona
+      </div>
+    </div>
+    <div class="title">
+        {{ this.plans[this.x].title }}
+    </div>
+    <div class="description">
+      {{ this.plans[this.x].description }}
+    </div>
+    <div class="positionText">
+      {{ this.plans[this.x].position.name }}
+    </div>
+    <div class="transportPrice">
+      <div class="transport">
+        {{this.plans[this.x].transport}}
+      </div>
+      <div class="price" *ngIf="this.plans[this.x].money == 0">
+        FREE
+      </div>
+      <div class="price" *ngIf="this.plans[this.x].money > 0">
+        {{this.plans[this.x].price}}
+      </div>
+
+    <div>
+  </div>
+
+<p>FILTER</p>
+<ul>
+  <li> Confort Zone</li>
+  <li> Explore </li>
+  <li> Random</li>
+</ul>
+<ul>
+  <li class="selected">Plans</li>
+  <li><a [routerLink]="['/myplans']">My Plans</a></li>
+  <li><a [routerLink]="['/mychats']">My Chats</a></li>
+  <li><a [routerLink]="['/lasthour']">Last Hour</a></li>
+  <li><a [routerLink]="['/settings']">Settings</a></li>
+</ul>

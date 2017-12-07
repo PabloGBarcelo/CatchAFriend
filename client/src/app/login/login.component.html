@@ -1,0 +1,18 @@
+<form>
+  <p> email
+    <input type="text" name="email" [(ngModel)]="email" required />
+  </p>
+  <p> password
+    <input type="password" name="password" [(ngModel)]="password" required />
+  </p>
+  <button (click)="login(email,password)"> Login </button>
+</form>
+<div>
+  <p class="error"> {{ this.error }} </p>
+</div>
+
+or <a [routerLink]="['signup']">create new account</a><br>
+<br>
+<a [routerLink]="['forgot']">Forgot your password?</a>
+
+<a [routerLink]='[""]'>back</a><br><br>

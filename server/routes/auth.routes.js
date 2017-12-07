@@ -5,7 +5,7 @@ const User = require('../models/User.model');
 const Routes = express.Router();
 ObjectId = require('mongodb').ObjectID;
 
-Routes.post('/signup', (req, res, next) => { // POSITION OBJ CHECK
+Routes.post('/signup', (req, res, next) => { // CHECKED
   console.log(req.body);
   /* TEMPORAL */
   req.body.birthday = Date.now();
@@ -63,6 +63,7 @@ Routes.post('/signup', (req, res, next) => { // POSITION OBJ CHECK
 
 Routes.post('/login', (req, res, next) => {
   passport.authenticate('local', (err, theUser, failureDetails) => {
+
     if (err) {
       res.status(500).json({ message: 'Something went wrong' });
       return;

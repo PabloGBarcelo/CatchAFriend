@@ -4,7 +4,7 @@ const User          = require('../models/User.model');
 const bcrypt        = require('bcrypt');
 
 passport.use(new LocalStrategy((username, password, next) => {
-  User.findOne({ username }, (err, foundUser) => {
+  User.findOne({ "email":username }, (err, foundUser) => {
     if (err) {
       next(err);
       return;
@@ -14,7 +14,7 @@ passport.use(new LocalStrategy((username, password, next) => {
       next(null, false, { message: 'Incorrect username' });
       return;
     }
-
+    console.log(bcrypt.hashSync(password,10));
     if (!bcrypt.compareSync(password, foundUser.password)) {
       next(null, false, { message: 'Incorrect password' });
       return;
