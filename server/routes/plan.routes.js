@@ -1,6 +1,7 @@
 const express = require('express');
 const Plan = require('../models/Plan.model');
 const Routes = express.Router();
+ObjectId = require('mongodb').ObjectID;
 
 Routes.post('/newplan', (req, res, next) => { // CHECKED
   console.log(req.body);
@@ -65,12 +66,58 @@ Routes.post('/newplan', (req, res, next) => { // CHECKED
           res.status(500).json({ message: 'Something went wrong' });
       });
     });
-    Routes.get('/plan', (req, res) => { // CHECKED
+
+    Routes.post('/plan', (req, res) => { // CHECKED
+      // Receive liking of user (categories in array), idUser, typeFilter, zone
       // Get all plans without filter (categories and subcategories)
       // MVP Later : db.collection.count()
       // db.collection.find().skip(20).limit(10) cursor.count()
-      // Plan.find({ $or:[{ "_userRequest": { "$ne": group._id }, "_dislikesId": { "$ne": group._id }}])
-      Plan.find({})
+      console.log("REQ.BODY");
+      console.log(req.body);
+      let search = {};
+      const rush = req.body.rush; // Boolean
+      const user = req.body.userId;
+      const likings = req.body.likingUser.map(e => { return e.categorie; });
+      const gender = [req.body.gender,'both'];
+      const now = new Date();
+      const rushNow = new Date();
+      switch(req.body.typeSearch){
+        case "Confort":
+        // Like category
+          search['_category'] = { $in: likings };
+        break;
+
+        case "Explore":
+          search['_category'] = { $nin: likings }; // likings its an array
+        break;
+
+        case "Random":
+          search['datePlan'] = { $gt: [ now ] };
+        break;
+
+      }
+      if (rush){
+        // Search with less than 2 hours from now
+        search['datePlan'] = { $gt: [ rushNow ] };
+      } else {
+        // Search normal, more than 2 hours from now
+        search['datePlan'] = { $gt: [ now ] };
+      }
+      // and not in request, dislikes or rejected
+      // In time
+      search['status'] = 'running';
+      search['_usersRequest'] = { $nin: [ user ] };
+      search['_acceptRequest'] = { $nin: [ user ] };
+      search['_dislikesId'] = { $nin: [ user ] };
+      search['_rejectedId'] = { $nin: [ user ] };
+      search['gender_allowed'] = { $in: gender };
+      console.log("SEARCH");
+      console.log(search);
+      // Filter by Zone
+      // add Filter by gender_allowed
+      // add filter status
+      // add Filter time
+      Plan.find(search)
               .then(data => { res.status(200).json(data); })
               .catch(err => { console.log(err);res.status(500).json({ message: 'Error listing'}); });
     });
@@ -142,6 +189,7 @@ Routes.post('/newplan', (req, res, next) => { // CHECKED
           .catch(err => res.status(500).json({ message: 'Error Accepting plan'}));
 
     });
+
 
 
 

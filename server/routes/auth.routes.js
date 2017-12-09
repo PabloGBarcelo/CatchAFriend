@@ -9,7 +9,7 @@ Routes.post('/signup', (req, res, next) => { // CHECKED
   console.log(req.body);
   /* TEMPORAL */
   req.body.birthday = Date.now();
-  req.body.liking = ObjectId("5a26e5307f3e4d51863f726e");
+  req.body.liking = { categorie:ObjectId("5a26e5307f3e4d51863f726e"), rate:1};
   /* REMOVE WHEN HAVE FRONT */
   const { name,
           nickname,
@@ -19,6 +19,7 @@ Routes.post('/signup', (req, res, next) => { // CHECKED
           birthday,
           liking,
           facebookId,
+          email,
           gender } = req.body;
   if (!name || !nickname || !password || !photoUrl || !position || !birthday || !liking || !gender) {
     res.status(400).json({ message: 'Please, provide all fields' });
@@ -39,9 +40,10 @@ Routes.post('/signup', (req, res, next) => { // CHECKED
       photoUrl,
       position,
       birthday,
-      liking,
+      _liking:liking,
       password,
-      gender
+      gender,
+      email
     });
     console.log(theUser);
     return theUser.save();
@@ -56,7 +58,7 @@ Routes.post('/signup', (req, res, next) => { // CHECKED
     });
   })
   .catch(e => {
-      res.status(500).json({ message: 'Something went wrong' });
+      res.status(500).json({ message: e });
   });
 });
 
@@ -100,5 +102,21 @@ Routes.get('/loggedin', (req, res, next) => {
   res.status(403).json({ message: 'Unauthorized' });
 });
 
+// Facebook auth routes
+Routes.get('/auth/facebook', function authenticateFacebook (req, res, next) {
+  req.session.returnTo = '/#' + req.query.returnTo;
+  next ();
+},
+passport.authenticate ('facebook'));
+
+Routes.get('/auth/facebook/callback', function (req, res, next) {
+ var authenticator = passport.authenticate ('facebook', {
+   successRedirect: req.session.returnTo,
+   failureRedirect: '/'
+  });
+
+  delete req.session.returnTo;
+  authenticator (req, res, next);
+});
 
 module.exports = Routes;

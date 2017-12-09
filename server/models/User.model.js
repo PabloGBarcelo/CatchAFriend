@@ -13,7 +13,7 @@ const userSchema = new Schema({
   _liking: [ { categorie: { type: Schema.Types.ObjectId, required: true, ref: 'Category' },
                          rate: { type: Number, default: 1 }
                        } ],
-  facebookId: String,
+  facebook: { id: String, token: String, name: String },
   password: { type: String, required: true },
   gender: { type: String, enum:[ 'male','female' ]},
   role: { type: String, enum: [ 'particular','business' ], default: 'particular' }

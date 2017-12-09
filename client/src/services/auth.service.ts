@@ -60,4 +60,12 @@ export class AuthService {
   getUser(){
     return this.user;
   }
+
+  loginFacebook(){
+    return this.http.get(`${BASE_DOMAIN}/auth/facebook?returnTo={{'/portal'}}`,this.options)
+      .map(res => res.json())
+      .map(user => this.handleUser(user))
+        .catch(this.handleError);
+  }
+
 }

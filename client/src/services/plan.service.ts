@@ -1,4 +1,3 @@
-require ('dotenv').config();
 import { Injectable, EventEmitter } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -18,8 +17,8 @@ export class PlanService {
     user:object;
   constructor(private http:Http, private auth:AuthService) { }
 
-  getPlans() {
-  return this.http.get(`${BASE_URL}/plan`,this.options)
+  getPlans(formData) {
+  return this.http.post(`${BASE_URL}/plan`,formData,this.options)
     .map(res => res.json())
     .catch(this.handleError);
   }
