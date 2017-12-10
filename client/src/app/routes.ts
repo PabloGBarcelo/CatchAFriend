@@ -16,6 +16,7 @@ const myRoutes: Routes = [
   { path: 'mychats',  component: MyChatsComponent },
   { path: 'lasthour',  component: LastHourComponent },
   { path: 'settings',  component: SettingsComponent },
+  { path: 'welcome', redirectTo: 'portal', pathMatch: 'full' }
 ];
 
 export { myRoutes };

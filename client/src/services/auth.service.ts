@@ -57,15 +57,16 @@ export class AuthService {
     .map(user => this.handleUser(null))
     .catch(this.handleError);
   }
+
   getUser(){
     return this.user;
   }
 
   loginFacebook(){
-    return this.http.get(`${BASE_DOMAIN}/auth/facebook?returnTo={{'/portal'}}`,this.options)
+    return this.http.get(`${BASE_DOMAIN}/auth/facebook`,this.options)
       .map(res => res.json())
       .map(user => this.handleUser(user))
-        .catch(this.handleError);
+      .catch(this.handleError);
   }
 
 }

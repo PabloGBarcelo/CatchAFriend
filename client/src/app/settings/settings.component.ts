@@ -9,12 +9,19 @@ import { Router } from '@angular/router';
 export class SettingsComponent implements OnInit {
   error:String;
   user:object;
+  location:Coordinates;
   constructor(public auth:AuthService, public router: Router) {
-    
+
   }
 
   ngOnInit() {
     this.user = this.auth.getUser();
+    if(navigator.geolocation){
+          navigator.geolocation.getCurrentPosition(position => {
+            this.location = position.coords;
+            console.log(position.coords);
+          });
+       }
   }
 
   logout() {

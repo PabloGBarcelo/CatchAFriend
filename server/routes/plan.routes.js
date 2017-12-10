@@ -1,6 +1,8 @@
 const express = require('express');
 const Plan = require('../models/Plan.model');
 const Routes = express.Router();
+var _ = require('lodash');
+
 ObjectId = require('mongodb').ObjectID;
 
 Routes.post('/newplan', (req, res, next) => { // CHECKED
@@ -18,9 +20,10 @@ Routes.post('/newplan', (req, res, next) => { // CHECKED
           photo,
           zone,
           status,
-          maxPeople
+          maxPeople,
+          street
          } = req.body;
-  if (!title || !position || !datePlan || !_category || !description || !photo ) {
+  if (!title || !position || !datePlan || !_category || !description || !photo || !street) {
     console.log("FAIL");
     res.status(400).json({ message: 'Please, provide all fields' });
     return;
@@ -56,7 +59,8 @@ Routes.post('/newplan', (req, res, next) => { // CHECKED
           photo,
           zone,
           status,
-          maxPeople
+          maxPeople,
+          street
         });
         return newPlan.save();
       })
@@ -81,6 +85,11 @@ Routes.post('/newplan', (req, res, next) => { // CHECKED
       const gender = [req.body.gender,'both'];
       const now = new Date();
       const rushNow = new Date();
+            console.log(req.body.position);
+      console.log(req.body.position);
+      const position = [req.body.position[1],req.body.position[0]]; // lat and lon => lon and lat
+      const distance = req.body.maxKilometers * 1000;
+
       switch(req.body.typeSearch){
         case "Confort":
         // Like category
@@ -92,7 +101,6 @@ Routes.post('/newplan', (req, res, next) => { // CHECKED
         break;
 
         case "Random":
-          search['datePlan'] = { $gt: [ now ] };
         break;
 
       }
@@ -111,14 +119,23 @@ Routes.post('/newplan', (req, res, next) => { // CHECKED
       search['_dislikesId'] = { $nin: [ user ] };
       search['_rejectedId'] = { $nin: [ user ] };
       search['gender_allowed'] = { $in: gender };
+      search['$nearSphere'] = { $geometry: {
+                                              "type": "Point",
+                                              "coordinates": position,
+                                            },
+                                            $maxDistance: distance
+                                          };
       console.log("SEARCH");
       console.log(search);
       // Filter by Zone
       // add Filter by gender_allowed
       // add filter status
       // add Filter time
-      Plan.find(search)
-              .then(data => { res.status(200).json(data); })
+      Plan.find(search).limit(100)
+            .exec(function(err, result){
+                console.log(result);
+            })
+              .then(data => { res.status(200).json(_.shuffle(data).splice(0,5)); }) // get 100 results, shuffle and return 5
               .catch(err => { console.log(err);res.status(500).json({ message: 'Error listing'}); });
     });
 
@@ -189,7 +206,6 @@ Routes.post('/newplan', (req, res, next) => { // CHECKED
           .catch(err => res.status(500).json({ message: 'Error Accepting plan'}));
 
     });
-
 
 
 

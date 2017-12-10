@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="title">
-        {{ this.plans[this.x].title }}
+      {{ this.plans[this.x].title }}
     </div>
     <div class="description">
       {{ this.plans[this.x].description }}
@@ -32,19 +32,20 @@
         {{this.plans[this.x].price}}
       </div>
 
-    <div>
+      <div>
+      </div>
+    </div>
   </div>
-
-<p>FILTER</p>
-<ul>
-  <li> Confort Zone</li>
-  <li> Explore </li>
-  <li> Random</li>
-</ul>
-<ul>
-  <li class="selected">Plans</li>
-  <li><a [routerLink]="['/myplans']">My Plans</a></li>
-  <li><a [routerLink]="['/mychats']">My Chats</a></li>
-  <li><a [routerLink]="['/lasthour']">Last Hour</a></li>
-  <li><a [routerLink]="['/settings']">Settings</a></li>
-</ul>
+  <p>FILTER</p>
+  <ul>
+    <li> Confort Zone</li>
+    <li> Explore </li>
+    <li> Random</li>
+  </ul>
+  <ul>
+    <li class="selected">Plans</li>
+    <li><a [routerLink]="['/myplans']">My Plans</a></li>
+    <li><a [routerLink]="['/mychats']">My Chats</a></li>
+    <li><a [routerLink]="['/lasthour']">Last Hour</a></li>
+    <li><a [routerLink]="['/settings']">Settings</a></li>
+  </ul>

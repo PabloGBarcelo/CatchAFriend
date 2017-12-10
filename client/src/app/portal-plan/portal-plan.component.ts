@@ -10,22 +10,31 @@ export class PortalPlanComponent implements OnInit {
   plans = [];
   x:Number = 0;
   body = {};
-  user;
-  constructor(private planService:PlanService, public auth:AuthService) { }
+  user:object;
+  constructor(private planService:PlanService, public auth:AuthService) {
+    this.user = this.auth.getUser();
+  }
 
   ngOnInit() {
-    this.user = this.auth.getUser();
     // Get all info data.
-    this.body['rush'] = false // Boolean
-    this.body['likingUser'] = this.user['_liking'];
-    this.body['userId'] = this.user['_id'];
-    this.body['gender'] = this.user['gender'];
-    this.body['typeSearch'] = 'Confort';
-    this.planService.getPlans(this.body).subscribe( listOfPlans =>{
-      this.plans = listOfPlans;
-    });
+    if (this.user){
+      this.body['rush'] = false // Boolean
+      this.body['likingUser'] = this.auth.user['_liking'];
+      this.body['userId'] = this.auth.user['_id'];
+      this.body['gender'] = this.auth.user['gender'];
+      this.body['position'] = this.auth.user['position'];
+      this.body['typeSearch'] = 'Confort';
+      this.body['maxKilometers'] = this.auth.user['maxKilometers'];
+      this.planService.getPlans(this.body).subscribe( listOfPlans =>{
+        this.plans = listOfPlans;
+    });}
   }
-  dosomething (){
-    alert("HEY");
+
+  likePlan(){
+
+  }
+
+  dislikePlan(){
+
   }
 }

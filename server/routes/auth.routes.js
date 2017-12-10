@@ -8,8 +8,7 @@ ObjectId = require('mongodb').ObjectID;
 Routes.post('/signup', (req, res, next) => { // CHECKED
   console.log(req.body);
   /* TEMPORAL */
-  req.body.birthday = Date.now();
-  req.body.liking = { categorie:ObjectId("5a26e5307f3e4d51863f726e"), rate:1};
+  req.body.liking = { categorie:ObjectId("5a2724a12b10285813df3339"), rate:1};
   /* REMOVE WHEN HAVE FRONT */
   const { name,
           nickname,
@@ -21,7 +20,7 @@ Routes.post('/signup', (req, res, next) => { // CHECKED
           facebookId,
           email,
           gender } = req.body;
-  if (!name || !nickname || !password || !photoUrl || !position || !birthday || !liking || !gender) {
+  if (!name || !nickname || !password || !position || !liking || !gender) {
     res.status(400).json({ message: 'Please, provide all fields' });
     return;
   }
@@ -58,7 +57,7 @@ Routes.post('/signup', (req, res, next) => { // CHECKED
     });
   })
   .catch(e => {
-      res.status(500).json({ message: e });
+      res.status(500).json(console.log(e));
   });
 });
 
@@ -100,23 +99,6 @@ Routes.get('/loggedin', (req, res, next) => {
     return;
   }
   res.status(403).json({ message: 'Unauthorized' });
-});
-
-// Facebook auth routes
-Routes.get('/auth/facebook', function authenticateFacebook (req, res, next) {
-  req.session.returnTo = '/#' + req.query.returnTo;
-  next ();
-},
-passport.authenticate ('facebook'));
-
-Routes.get('/auth/facebook/callback', function (req, res, next) {
- var authenticator = passport.authenticate ('facebook', {
-   successRedirect: req.session.returnTo,
-   failureRedirect: '/'
-  });
-
-  delete req.session.returnTo;
-  authenticator (req, res, next);
 });
 
 module.exports = Routes;

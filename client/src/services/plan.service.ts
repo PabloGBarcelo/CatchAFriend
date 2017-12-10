@@ -29,6 +29,10 @@ export class PlanService {
       .catch(this.handleError);
   }
 
+  likePlan(formData){
+    // Send id user and id plan
+  }
+
   handleError(e) {
     return Observable.throw(e.json().message);
   }

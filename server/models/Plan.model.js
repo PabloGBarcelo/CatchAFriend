@@ -3,10 +3,8 @@ const Schema   = mongoose.Schema;
 
 const planSchema = new Schema({
   title: { type:String, required:true },
-  position: { type:{ lat: Number,
-                     lon: Number,
-                     name: String },
-                required: true },
+  position: { type: [ Number ], index:'2dsphere', required: true },
+  street: { type: String, required: true},
   _owner: [ { type: Schema.Types.ObjectId, required: true, ref: 'User' } ],
   datePlan: { type: Date, required: true },
   _usersRequest: [ { type: Schema.Types.ObjectId, ref: 'User' } ],

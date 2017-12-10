@@ -16,6 +16,7 @@ import { MyChatsComponent } from './my-chats/my-chats.component';
 import { LastHourComponent } from './last-hour/last-hour.component';
 import { SettingsComponent } from './settings/settings.component';
 import { PlanService } from '../services/plan.service';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { PlanService } from '../services/plan.service';
     MyPlansComponent,
     MyChatsComponent,
     LastHourComponent,
-    SettingsComponent
+    SettingsComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
