@@ -10,12 +10,14 @@ import { SettingsComponent } from './settings/settings.component';
 import { SignupComponent } from './signup/signup.component';
 import { ExtrasignupComponent } from './extrasignup/extrasignup.component';
 import { SwipeComponent } from './swipe/swipe.component';
+import { MyPlansDetailComponent } from './my-plans-detail/my-plans-detail.component';
 
 const myRoutes: Routes = [
   { path: '',  component: LandingPageComponent },
   { path: 'login',  component: LoginComponent },
   { path: 'portal',  component: PortalPlanComponent },
   { path: 'myplans',  component: MyPlansComponent },
+  { path: 'myplans/:id',  component: MyPlansDetailComponent },
   { path: 'mychats',  component: MyChatsComponent },
   { path: 'lasthour',  component: LastHourComponent },
   { path: 'settings',  component: SettingsComponent },

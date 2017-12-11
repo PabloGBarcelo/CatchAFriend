@@ -21,7 +21,12 @@ export class PlanService {
   return this.http.get(`${BASE_URL}/planUser/${id}`,this.options)
     .map(res => res.json())
     .catch(this.handleError);
+  }
 
+  getPlan(id){
+    return this.http.get(`${BASE_URL}/plan/${id}`,this.options)
+      .map(res => res.json())
+      .catch(this.handleError);
   }
 
   getPlans(formData) {
@@ -48,6 +53,13 @@ export class PlanService {
                     .map(res => res.json())
                     .catch(this.handleError);
   }
+
+  cancelPlan(userId,planId){
+    return this.http.post(`${BASE_URL}/plan/${planId}/cancel/${userId}`,{},this.options)
+                    .map(res => res.json())
+                    .catch(this.handleError);
+  }
+
 
   handleError(e) {
     return Observable.throw(e.json().message);

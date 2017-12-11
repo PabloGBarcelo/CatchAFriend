@@ -20,6 +20,7 @@ import { SignupComponent } from './signup/signup.component';
 import { ExtrasignupComponent } from './extrasignup/extrasignup.component';
 import { CategoriesService } from '../services/categories.service';
 import { SwipeComponent } from './swipe/swipe.component';
+import { MyPlansDetailComponent } from './my-plans-detail/my-plans-detail.component';
 import 'hammerjs';
 import 'hammer-timejs';
 
@@ -36,7 +37,8 @@ import 'hammer-timejs';
     SettingsComponent,
     SignupComponent,
     ExtrasignupComponent,
-    SwipeComponent
+    SwipeComponent,
+    MyPlansDetailComponent
   ],
   imports: [
     BrowserModule,

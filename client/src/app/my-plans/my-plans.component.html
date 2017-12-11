@@ -1,5 +1,21 @@
 
-
+<div *ngFor="let plan of userPlans">
+  <a [routerLink]="[plan._id]">
+  <div class="image">
+    <img width="50px" [src]="plan.photo[0]">
+  </div>
+    {{ plan.title }}
+  <div class="day">
+    {{ plan.datePlan }}
+  </div>
+  <div class="maxPeople">
+    {{ plan.maxPeople }}
+  </div>
+  </a>
+  <div class="remove">
+    <button (click)="removePlan([plan._id])">Reject this plan</button>
+  </div>
+</div>
 <div class="newPlan">
   ADD NEW PLAN
 </div>

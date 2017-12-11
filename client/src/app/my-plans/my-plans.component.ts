@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PlanService } from '../../services/plan.service';
+import {  PlanService } from '../../services/plan.service';
 import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-my-plans',
@@ -7,18 +7,33 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./my-plans.component.css']
 })
 export class MyPlansComponent implements OnInit {
-
-  constructor(public planService:PlanService, public auth:AuthService) { }
+  userPlans:Array<object>;
+  user;
+  constructor(public planService: PlanService, public auth: AuthService) { }
 
   ngOnInit() {
     this.auth.isLoggedIn().subscribe(
       (user) => {
-    this.planService.getAllPlansOfUser(user._id).subscribe(
+        this.user = user;
+        this.loadData();
+      }, (err) => { console.log(err) });
+  }
 
+  removePlan(planId){
+    this.planService.cancelPlan(this.user._id,planId).subscribe(
+      plan =>{
+        this.loadData();
+      },
+      error =>{
+        console.log(error);
+      }
     );
-  }, (err) => {
-    console.log(err);
-  }
   }
 
+  loadData(){
+    this.planService.getAllPlansOfUser(this.user._id).subscribe(
+      (plans) => {
+        this.userPlans = plans;
+      }, (err) => { console.log(err) });
+  }
 }

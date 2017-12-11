@@ -1,0 +1,44 @@
+<div *ngIf="myPlan">
+  <div class="photoPlan">
+    <img width="300px" [src]="myPlan.photo[0]">
+  </div>
+  <div class="owner">
+    <img width="50px" [src]="myPlan._owner[0].photoUrl">
+    {{ myPlan._owner[0].nickname }}
+  </div>
+  <div class="dataDate">
+    {{ myPlan.datePlan }}
+  </div>
+  <div class="numberPeople">
+    {{ myPlan.maxPeople - myPlan._acceptRequest.length}}
+    ({{ myPlan.maxPeople}}) img persona
+  </div>
+  <div class="title">
+    {{ myPlan.title }}
+  </div>
+  <div class="description">
+    {{ myPlan.description }}
+  </div>
+  <div class="positionText">
+    {{ myPlan.position.name }}
+  </div>
+  <div class="transportPrice">
+    <div class="transport">
+      {{myPlan.transport}}
+    </div>
+    <div class="price" *ngIf="myPlan.money == 0">
+      FREE
+    </div>
+    <div class="price" *ngIf="myPlan.money > 0">
+      {{myPlan.price}}
+    </div>
+  </div>
+</div>
+<a [routerLink]="['/myplans']">Go back</a>
+<ul>
+  <li><a [routerLink]="['/portal']">Plans</a></li>
+  <li class="selected">My Plans</li>
+  <li><a [routerLink]="['/mychats']">My Chats</a></li>
+  <li><a [routerLink]="['/lasthour']">Last Hour</a></li>
+  <li><a [routerLink]="['/settings']">Settings</a></li>
+</ul>

@@ -118,7 +118,7 @@ Routes.post('/newplan', (req, res, next) => { // CHECKED
       search['_dislikesId'] = { $nin: [ user ] };
       search['_rejectedId'] = { $nin: [ user ] };
       search['gender_allowed'] = { $in: gender };
-      search['_liking'] = { rate: { $gt: 0 }},
+      //search['_liking'] = { rate: { $gt: 0 }},
       search['position'] = { $nearSphere: { $geometry: {
                                               "type": "Point",
                                               "coordinates": position,
@@ -143,11 +143,14 @@ Routes.post('/newplan', (req, res, next) => { // CHECKED
     });
 
     Routes.get('/planUser/:id', (req, res, next) => { // CHECKED
-      let search={};
       let user = req.params.id;
-      search['_acceptRequest'] = { $in: [ user ] };
-      search['_usersRequest'] = { $in: [ user ] };
-      search['_acceptRequest'] = { $in: [ user ] };
+      console.log("USER ID");
+      console.log(user);
+      let search = { $or: [ { "_acceptRequest":{ $in: [ user ] }}
+                            ,{ "_usersRequest":{ $in: [ user ] } }
+                           ,   { "_rejectedId":{ $in: [ user ] } }]
+                               };
+      console.log(search);
       Plan.find(search)
           .then(data => { res.status(200).json(data);})
           .catch(err => { res.status(500).json({ message: 'Error listing'});});
@@ -156,8 +159,9 @@ Routes.post('/newplan', (req, res, next) => { // CHECKED
     Routes.get('/plan/:id', (req, res, next) => { // CHECKED
       // Get plan by id
       Plan.findById(req.params.id)
-              .then(data => { res.status(200).json(data);})
-              .catch(err => { res.status(500).json({ message: 'Error listing'});});
+          .populate("_owner")
+          .then(data => { res.status(200).json(data);})
+          .catch(err => { res.status(500).json({ message: 'Error listing'});});
     });
 
     Routes.post('/plan/:id', (req, res, next) => { // CHECKED
@@ -207,6 +211,19 @@ Routes.post('/newplan', (req, res, next) => { // CHECKED
 
     });
 
+// Reject by owner or cancel by person interested
+    Routes.post('/plan/:planId/cancel/:userId', (req, res, next) => {
+      console.log("Entre");
+      Plan.findOneAndUpdate({"_id":req.params.planId, "_usersRequest": req.params.userId },
+                            { $push: {"_dislikesId": req.params.userId },
+                              $pull:{ "_usersRequest": req.params.userId }},{new:true})
+          .then(planAccepted => {
+            if (!planAccepted)
+              res.status(500).json({ message: 'No plan for Accept'});
+            else
+              res.status(200).json(planAccepted); })
+          .catch(err => res.status(500).json({ message: 'Error Rejecting plan'}));
+    });
     // When a user accept a plan
     Routes.post('/plan/:planId/accept/:userId', (req, res, next) => { // CHECKED
       Plan.findOneAndUpdate({"_id":req.params.planId, "_usersRequest": req.params.userId },
