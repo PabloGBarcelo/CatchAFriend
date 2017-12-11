@@ -23,6 +23,7 @@ import { SwipeComponent } from './swipe/swipe.component';
 import { MyPlansDetailComponent } from './my-plans-detail/my-plans-detail.component';
 import 'hammerjs';
 import 'hammer-timejs';
+import { CreatePlanComponent } from './create-plan/create-plan.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import 'hammer-timejs';
     SignupComponent,
     ExtrasignupComponent,
     SwipeComponent,
-    MyPlansDetailComponent
+    MyPlansDetailComponent,
+    CreatePlanComponent
   ],
   imports: [
     BrowserModule,
