@@ -1,10 +1,27 @@
-<p>
-  settings works!
-</p>
-<div *ngIf="this.auth.getUser()">
-  <p> Nos vemos pronto {{ this.auth.getUser().nickname }}</p>
+<div *ngIf="this.user">
+  <div class="phototop">
+    <img [src]="user.photoUrl[0]">
+  </div>
+  <div class="name">
+    Welcome to your area {{ this.user.nickname }}
+  </div>
+  <div *ngIf="show" class="profileHidden">
+    <form (ngSubmit)="doSomething(formData)" #formData="ngForm">
+      Email:
+      <input type="text" name="email" [value]="user.email"> Nick:
+      <input type="text" name="nickname" [value]="user.nickname"> Photo:
+      <input type="file" name="photo"> Categories: Kilometers ({{ this.rangeKilometers }}):
+      <input type="range" #range (input)="updateKilometers(range.value)" min="10" max="500" [value]="user.maxKilometers">
+      <button type="submit">Save profile</button>
+      <button (click)="this.show=!this.show">Cancel Changes</button>
+    </form>
+  </div>
 </div>
-<button (click)="logout()">LOGOUT!</button>
+<div *ngIf="!this.show">
+  <button (click)="changeStatusProfile()"> Edit/Close Profile </button>
+</div>
+  <button (click)="logout()">Close Session!</button>
+
 <ul>
   <li><a [routerLink]="['/portal']">Plans</a></li>
   <li><a [routerLink]="['/myplans']">My Plans</a></li>

@@ -1,10 +1,18 @@
 <div>
 
-  <div *ngIf="this.plans[this.x]">
-    <div class="photoPlan">
-      <img width="300px" [src]="this.plans[this.x].photo[0]">
+    <div *ngIf="this.plans[this.x]">
+      <div class="thing-to-move"
+       (panstart)="onPanStart($event)"
+       (panmove)="onPan($event)"
+       (panEnd)="onPanEnd($event)">
+         <div [style.marginLeft.px]="placeX">
+      <div class="photoPlan">
+        <img width="300px" [src]="this.plans[this.x].photo[0]">
+      </div>
     </div>
+  </div>
     <div class="dataHeader">
+      {{ placeX }}, {{ placeY }}
       <div class="owner">
         <img width="50px"[src]="this.plans[this.x]._owner[0].photoUrl">
         {{ this.plans[this.x]._owner[0].nickname }}
@@ -42,9 +50,19 @@
   </div>
   <p>FILTER</p>
   <ul>
-    <li> Confort Zone</li>
-    <li> Explore </li>
-    <li> Random</li>
+    <li><div *ngIf="this.typeSearch == 'Confort'">Confort Zone</div>
+        <div *ngIf="this.typeSearch != 'Confort'"><button (click)="setConfort()">Confort Zone</button></div>
+    </li>
+
+    <li><div *ngIf="this.typeSearch == 'Explore'"> Explore </div>
+        <div *ngIf="this.typeSearch != 'Explore'"><button (click)="setExplore()">Explore</button></div>
+    </li>
+    <li><div *ngIf="this.typeSearch == 'Random'"> Random</div>
+        <div *ngIf="this.typeSearch != 'Random'"><button (click)="setRandom()">Random</button></div>
+    </li>
+    <li>
+      <input type="checkbox" name="rush" (change)="setRush($event)"S>
+    </li>
   </ul>
   <ul>
     <li class="selected">Plans</li>

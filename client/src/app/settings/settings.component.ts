@@ -10,13 +10,23 @@ export class SettingsComponent implements OnInit {
   error:String;
   user:object;
   location:Coordinates;
+  show:boolean = false;
+  register:object = {};
+  rangeKilometers:number;
   constructor(public auth:AuthService, public router: Router) {
 
   }
 
   ngOnInit() {
-    this.user = this.auth.getUser();
-
+    this.auth.isLoggedIn().subscribe(
+      (user) => {
+        this.user = user;
+        this.rangeKilometers = user.maxKilometers;
+        console.log(this.user);
+      }),
+      (err) => {
+        console.log(err);
+      }
   }
 
   logout() {
@@ -27,5 +37,16 @@ export class SettingsComponent implements OnInit {
       (error) => {
         this.error = error;
       });
+  }
+
+  changeStatusProfile(){
+    if (this.show == true){
+      // save changes
+    }
+    this.show = !this.show;
+  }
+
+  updateKilometers(rangeValue){
+    this.rangeKilometers = rangeValue;
   }
 }

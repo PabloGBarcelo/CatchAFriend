@@ -17,6 +17,13 @@ export class PlanService {
     user:object;
   constructor(private http:Http, private auth:AuthService) { }
 
+  getAllPlansOfUser(id){
+  return this.http.get(`${BASE_URL}/planUser/${id}`,this.options)
+    .map(res => res.json())
+    .catch(this.handleError);
+
+  }
+
   getPlans(formData) {
   return this.http.post(`${BASE_URL}/plan`,formData,this.options)
     .map(res => res.json())
@@ -29,8 +36,17 @@ export class PlanService {
       .catch(this.handleError);
   }
 
-  likePlan(formData){
+  likePlan(userId,planId){
     // Send id user and id plan
+    return this.http.post(`${BASE_URL}/plan/${planId}/like/${userId}`,{},this.options)
+                    .map(res => res.json())
+                    .catch(this.handleError);
+  }
+
+  dislikePlan(userId,planId){
+    return this.http.post(`${BASE_URL}/plan/${planId}/dislike/${userId}`,{},this.options)
+                    .map(res => res.json())
+                    .catch(this.handleError);
   }
 
   handleError(e) {

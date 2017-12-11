@@ -7,24 +7,44 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./portal-plan.component.css']
 })
 export class PortalPlanComponent implements OnInit {
+  // constant for swipe action: left or right
+  SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
+
   plans = [];
   x: Number = 0;
   body = {};
   user: object;
+  placeX: number = 0;
+  placeY: number = 0;
+  placeXEnd: number = 0;
+  startX: number = 0;
+  startY: number = 0;
+  totalPlace: number = 0;
+  typeSearch: string ="Confort"
+  rush:Boolean = false;
+  idUser;
   constructor(private planService: PlanService, public auth: AuthService) {
     this.user = this.auth.getUser();
   }
 
   ngOnInit() {
     // Get all info data.
+    if (typeof(this.plans) === "undefined" || this.plans.length == 0){
+    console.log("Entre");
+      this.takePlans();
+    }
+  }
+
+  takePlans(){
     this.auth.isLoggedIn().subscribe(
       (user) => {
-        this.body['rush'] = false // Boolean
+        this.idUser = user['_id'];
+        this.body['rush'] = this.rush // Boolean
         this.body['likingUser'] = user['_liking'];
         this.body['userId'] = user['_id'];
         this.body['gender'] = user['gender'];
         this.body['position'] = user['position'];
-        this.body['typeSearch'] = 'Confort';
+        this.body['typeSearch'] = this.typeSearch;
         this.body['maxKilometers'] = user['maxKilometers'];
         this.planService.getPlans(this.body).subscribe(listOfPlans => {
           console.log(listOfPlans);
@@ -35,12 +55,89 @@ export class PortalPlanComponent implements OnInit {
         console.log(err);
       }
   }
-
   likePlan() {
-
+    console.log(this.idUser,this.plans[0]._id);
+    this.planService.likePlan(this.idUser,this.plans[0]._id).subscribe(
+      () => {
+        this.plans.shift();
+        if (typeof(this.plans) === "undefined" || this.plans.length <= 1){
+        console.log("Entre");
+          this.takePlans();
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   dislikePlan() {
+    console.log(this.idUser,this.plans[0]._id);
+    this.planService.dislikePlan(this.idUser,this.plans[0]._id).subscribe(
+      () => {
+        this.plans.shift();
+        if (typeof(this.plans) === "undefined" || this.plans.length <= 1){
+        console.log("Entre");
+          this.takePlans();
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 
+  onPanStart(event: any): void {
+    event.preventDefault();
+    this.startX = this.placeX;
+    //this.startY = this.placeY;
+  }
+
+  onPan(event: any): void {
+    event.preventDefault();
+    this.placeX = this.startX + event.deltaX;
+    //this.placeY = this.startY + event.deltaY;
+  }
+  onPanEnd(event: any): void{
+    event.preventDefault();
+    this.compareStartAndEnd();
+  }
+
+  compareStartAndEnd(): void{
+    this.totalPlace = this.placeX - this.startX;
+    if (this.totalPlace > 100){ // Disliked!
+      console.log("Liked");
+      this.likePlan();
+    }
+    else if (this.totalPlace < -100){
+      console.log("Disliked");
+      this.dislikePlan();
+    }
+    this.placeX = 0;
+  }
+
+  setConfort(){
+    this.typeSearch = "Confort";
+    this.takePlans();
+  }
+
+  setExplore(){
+    this.typeSearch = "Explore";
+    this.takePlans();
+  }
+
+  setRandom(){
+    this.typeSearch = "Random";
+    this.takePlans();
+  }
+
+  setRush(e){
+    if (e.target.checked){
+      this.rush = true;
+      this.takePlans();
+    } else {
+      this.rush = false;
+      this.takePlans();
+    }
   }
 }

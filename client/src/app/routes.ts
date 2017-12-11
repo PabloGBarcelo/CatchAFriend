@@ -9,6 +9,7 @@ import { LastHourComponent } from './last-hour/last-hour.component';
 import { SettingsComponent } from './settings/settings.component';
 import { SignupComponent } from './signup/signup.component';
 import { ExtrasignupComponent } from './extrasignup/extrasignup.component';
+import { SwipeComponent } from './swipe/swipe.component';
 
 const myRoutes: Routes = [
   { path: '',  component: LandingPageComponent },
@@ -21,6 +22,7 @@ const myRoutes: Routes = [
   { path: 'signup',  component: SignupComponent },
   { path: 'extrasignup',  component: ExtrasignupComponent },
   { path: 'welcome', redirectTo: 'extrasignup', pathMatch: 'full' },
+  { path: 'swipe',  component: SwipeComponent },
 
 ];
 

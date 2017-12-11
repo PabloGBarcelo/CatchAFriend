@@ -19,6 +19,9 @@ import { PlanService } from '../services/plan.service';
 import { SignupComponent } from './signup/signup.component';
 import { ExtrasignupComponent } from './extrasignup/extrasignup.component';
 import { CategoriesService } from '../services/categories.service';
+import { SwipeComponent } from './swipe/swipe.component';
+import 'hammerjs';
+import 'hammer-timejs';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,8 @@ import { CategoriesService } from '../services/categories.service';
     LastHourComponent,
     SettingsComponent,
     SignupComponent,
-    ExtrasignupComponent
+    ExtrasignupComponent,
+    SwipeComponent
   ],
   imports: [
     BrowserModule,

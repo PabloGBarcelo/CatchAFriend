@@ -80,9 +80,10 @@ Routes.post('/newplan', (req, res, next) => { // CHECKED
       const likings = req.body.likingUser.map(e => { return e.categorie; });
       const gender = [req.body.gender,'both'];
       const now = new Date();
-      const rushNow = new Date();
-            console.log(req.body.position);
-      console.log(req.body.position);
+      let rushNow = new Date();
+      rushNow = rushNow.setHours(rushNow.getHours()+2); // plans in less than 2 hours
+      console.log("rushnow");
+      console.log(rushNow);
       const position = [req.body.position[0],req.body.position[1]]; // lat and lon => lon and lat
       const distance = req.body.maxKilometers * 1000;
       console.log("LLEGUE1");
@@ -103,7 +104,7 @@ Routes.post('/newplan', (req, res, next) => { // CHECKED
       }
       if (rush){
         // Search with less than 2 hours from now
-        search['datePlan'] = { $gt: [ rushNow ] };
+        search['datePlan'] = { $lte: [ rushNow ] };
       } else {
         // Search normal, more than 2 hours from now
         search['datePlan'] = { $gt: [ now ] };
@@ -117,6 +118,7 @@ Routes.post('/newplan', (req, res, next) => { // CHECKED
       search['_dislikesId'] = { $nin: [ user ] };
       search['_rejectedId'] = { $nin: [ user ] };
       search['gender_allowed'] = { $in: gender };
+      search['_liking'] = { rate: { $gt: 0 }},
       search['position'] = { $nearSphere: { $geometry: {
                                               "type": "Point",
                                               "coordinates": position,
@@ -138,6 +140,17 @@ Routes.post('/newplan', (req, res, next) => { // CHECKED
             })
               .then(data => { res.status(200).json(_.shuffle(data).splice(0,5)); }) // get 100 results, shuffle and return 5
               .catch(err => { console.log(err);res.status(500).json({ message: 'Error listing'}); });
+    });
+
+    Routes.get('/planUser/:id', (req, res, next) => { // CHECKED
+      let search={};
+      let user = req.params.id;
+      search['_acceptRequest'] = { $in: [ user ] };
+      search['_usersRequest'] = { $in: [ user ] };
+      search['_acceptRequest'] = { $in: [ user ] };
+      Plan.find(search)
+          .then(data => { res.status(200).json(data);})
+          .catch(err => { res.status(500).json({ message: 'Error listing'});});
     });
 
     Routes.get('/plan/:id', (req, res, next) => { // CHECKED

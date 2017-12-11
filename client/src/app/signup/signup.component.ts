@@ -16,7 +16,6 @@ export class SignupComponent implements OnInit {
   error:String;
 
   constructor(public auth:AuthService, public router: Router, public ngZone: NgZone) { }
-
   ngOnInit() {
   }
 
