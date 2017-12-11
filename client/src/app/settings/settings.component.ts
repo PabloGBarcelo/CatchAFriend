@@ -16,12 +16,7 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.auth.getUser();
-    if(navigator.geolocation){
-          navigator.geolocation.getCurrentPosition(position => {
-            this.location = position.coords;
-            console.log(position.coords);
-          });
-       }
+
   }
 
   logout() {

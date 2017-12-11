@@ -9,22 +9,25 @@ password,
 email,
 gender
 
-STEP 2
-photoUrl,
-
 STEP 3 (FB & SIGNUP) => Navigate
 If come from facebook only need:
 position (auto),
 birthday,
 _liking,
+photoUrl,
 
 -->
-<div *ngIf="step == 1">
-
+<div *ngIf="!statusLogin">
+  <input type="radio" value="particular" [(ngModel)]="register.role">particular
+  <input type="radio" value="business" [(ngModel)]="register.role">business
+  <button (click)="tostep2()"> Login </button>
 </div>
-<div *ngIf="step == 2">
-
-</div>
-<div *ngIf="step == 3">
-
+<div *ngIf="statusLogin">
+  <input type="radio" value="male" [(ngModel)]="register.gender">MALE
+  <input type="radio" value="female" [(ngModel)]="register.gender">FEMALE
+  <input type="text" name="name" [(ngModel)]="register.name" placeHolder="name">
+  <input type="text" name="email" [(ngModel)]="register.email" placeHolder="email">
+  <input type="text" name="name" [(ngModel)]="register.nickname" placeHolder="nickname">
+  <input type="password" name="password" [(ngModel)]="register.password" placeHolder="password">
+  <button (click)="flyLittleBird()"> Login </button>
 </div>

@@ -2,9 +2,13 @@
 
   <div *ngIf="this.plans[this.x]">
     <div class="photoPlan">
-      <img [src]="this.plans[this.x].photo[0]">
+      <img width="300px" [src]="this.plans[this.x].photo[0]">
     </div>
     <div class="dataHeader">
+      <div class="owner">
+        <img width="50px"[src]="this.plans[this.x]._owner[0].photoUrl">
+        {{ this.plans[this.x]._owner[0].nickname }}
+      </div>
       <div class="dataDate">
         {{ this.plans[this.x].datePlan }}
       </div>

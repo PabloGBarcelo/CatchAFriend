@@ -10,6 +10,7 @@ const BASE_URL = `${BASE_DOMAIN}/api`;
 
 @Injectable()
 export class AuthService {
+  statusLogin:boolean = false;
   options:object = {
       withCredentials:true
     }
@@ -20,6 +21,7 @@ export class AuthService {
   }
 
   handleError(e) {
+    console.log(e)
     return Observable.throw(e.json().message);
   }
 
@@ -32,15 +34,16 @@ export class AuthService {
   isLoggedIn() {
   return this.http.get(`${BASE_URL}/loggedin`,this.options)
     .map(res => res.json())
-    .map(user => this.handleUser(user))
-      .catch(this.handleError);
+    .map(user => {return this.handleUser(user)})
+    .catch(this.handleError);
   }
 
   signup(formData) {
+    console.log(formData);
     return this.http.post(`${BASE_URL}/signup`, formData, this.options)
       .map(res => res.json())
       .map(user => this.handleUser(user))
-      .catch(this.handleError);
+      .catch((err) => this.handleError(err));
   }
 
   login(username:string, password:string) {
@@ -51,11 +54,18 @@ export class AuthService {
       .catch(this.handleError);
   }
 
+  editUser(data,id){
+    return this.http.post(`${BASE_URL}/edit/${id}`, data, this.options)
+      .map(res => res.json())
+      .map(user => this.handleUser(user))
+      .catch(this.handleError);
+  }
+
   logout() {
   return this.http.get(`${BASE_URL}/logout`,this.options)
     .map(res => res.json())
     .map(user => this.handleUser(null))
-    .catch(this.handleError);
+    .catch((err) => this.handleError(err));
   }
 
   getUser(){

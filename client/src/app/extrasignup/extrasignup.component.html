@@ -1,0 +1,18 @@
+<!-- STEP 3 (FB & SIGNUP) => Navigate
+If come from facebook only need:
+position (auto),
+birthday,
+_liking,
+ -->
+
+SELECT YOUR LIKING! (at least one)
+<input type="date" [(ngModel)]="birthday">
+<form #myForm="ngForm" (submit)="SendFormAndEnjoy(myForm)">
+<div *ngFor="let categorie of allCategories">
+  <label>
+        <input type="checkbox" name="{{ categorie._id }}" value="{{ categorie._id }}" ngModel/>
+        {{ categorie.name }}
+    </label>
+</div>
+<button type="submit">SEND</button>
+</form>

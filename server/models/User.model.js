@@ -8,7 +8,7 @@ const userSchema = new Schema({
   photoUrl: { type:String, default:"https://cdn.vectorstock.com/i/thumb-large/71/60/kawaii-cartoon-face-vector-15307160.jpg"},
   position: { type: [ Number ], index: '2dsphere'},
   birthday: { type: Date },
-  _liking: [ { categorie: { type: Schema.Types.ObjectId, required: true, ref: 'Category' },
+  _liking: [ { categorie: { type: Schema.Types.ObjectId, ref: 'Category' },
                          rate: { type: Number, default: 1 }
                        } ],
   facebook: { id: String, token: String, name: String },

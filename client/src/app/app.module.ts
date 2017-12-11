@@ -17,6 +17,8 @@ import { LastHourComponent } from './last-hour/last-hour.component';
 import { SettingsComponent } from './settings/settings.component';
 import { PlanService } from '../services/plan.service';
 import { SignupComponent } from './signup/signup.component';
+import { ExtrasignupComponent } from './extrasignup/extrasignup.component';
+import { CategoriesService } from '../services/categories.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { SignupComponent } from './signup/signup.component';
     MyChatsComponent,
     LastHourComponent,
     SettingsComponent,
-    SignupComponent
+    SignupComponent,
+    ExtrasignupComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,7 @@ import { SignupComponent } from './signup/signup.component';
     HttpModule,
     RouterModule.forRoot(myRoutes),
   ],
-  providers: [AuthService, PlanService],
+  providers: [AuthService, PlanService, CategoriesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

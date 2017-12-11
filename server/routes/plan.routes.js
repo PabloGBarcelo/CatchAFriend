@@ -72,10 +72,6 @@ Routes.post('/newplan', (req, res, next) => { // CHECKED
     });
 
     Routes.post('/plan', (req, res) => { // CHECKED
-      // Receive liking of user (categories in array), idUser, typeFilter, zone
-      // Get all plans without filter (categories and subcategories)
-      // MVP Later : db.collection.count()
-      // db.collection.find().skip(20).limit(10) cursor.count()
       console.log("REQ.BODY");
       console.log(req.body);
       let search = {};
@@ -87,8 +83,9 @@ Routes.post('/newplan', (req, res, next) => { // CHECKED
       const rushNow = new Date();
             console.log(req.body.position);
       console.log(req.body.position);
-      const position = [req.body.position[1],req.body.position[0]]; // lat and lon => lon and lat
+      const position = [req.body.position[0],req.body.position[1]]; // lat and lon => lon and lat
       const distance = req.body.maxKilometers * 1000;
+      console.log("LLEGUE1");
 
       switch(req.body.typeSearch){
         case "Confort":
@@ -114,16 +111,18 @@ Routes.post('/newplan', (req, res, next) => { // CHECKED
       // and not in request, dislikes or rejected
       // In time
       search['status'] = 'running';
+      //search['_owner'] = { $nin: [ user ] };
       search['_usersRequest'] = { $nin: [ user ] };
       search['_acceptRequest'] = { $nin: [ user ] };
       search['_dislikesId'] = { $nin: [ user ] };
       search['_rejectedId'] = { $nin: [ user ] };
       search['gender_allowed'] = { $in: gender };
-      search['$nearSphere'] = { $geometry: {
+      search['position'] = { $nearSphere: { $geometry: {
                                               "type": "Point",
                                               "coordinates": position,
                                             },
                                             $maxDistance: distance
+                                          }
                                           };
       console.log("SEARCH");
       console.log(search);
@@ -131,8 +130,10 @@ Routes.post('/newplan', (req, res, next) => { // CHECKED
       // add Filter by gender_allowed
       // add filter status
       // add Filter time
+      console.log("LLEGUE");
       Plan.find(search).limit(100)
-            .exec(function(err, result){
+          .populate("_owner")
+          .exec(function(err, result){
                 console.log(result);
             })
               .then(data => { res.status(200).json(_.shuffle(data).splice(0,5)); }) // get 100 results, shuffle and return 5

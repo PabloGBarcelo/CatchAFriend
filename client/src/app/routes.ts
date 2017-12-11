@@ -7,6 +7,8 @@ import { MyPlansComponent } from './my-plans/my-plans.component';
 import { MyChatsComponent } from './my-chats/my-chats.component';
 import { LastHourComponent } from './last-hour/last-hour.component';
 import { SettingsComponent } from './settings/settings.component';
+import { SignupComponent } from './signup/signup.component';
+import { ExtrasignupComponent } from './extrasignup/extrasignup.component';
 
 const myRoutes: Routes = [
   { path: '',  component: LandingPageComponent },
@@ -16,7 +18,10 @@ const myRoutes: Routes = [
   { path: 'mychats',  component: MyChatsComponent },
   { path: 'lasthour',  component: LastHourComponent },
   { path: 'settings',  component: SettingsComponent },
-  { path: 'welcome', redirectTo: 'portal', pathMatch: 'full' }
+  { path: 'signup',  component: SignupComponent },
+  { path: 'extrasignup',  component: ExtrasignupComponent },
+  { path: 'welcome', redirectTo: 'extrasignup', pathMatch: 'full' },
+
 ];
 
 export { myRoutes };

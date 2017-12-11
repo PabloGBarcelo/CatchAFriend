@@ -6,6 +6,7 @@ const Routes = express.Router();
 ObjectId = require('mongodb').ObjectID;
 
 Routes.post('/signup', (req, res, next) => { // CHECKED
+  console.log("REQ BODY");
   console.log(req.body);
   /* TEMPORAL */
   req.body.liking = { categorie:ObjectId("5a2724a12b10285813df3339"), rate:1};
@@ -16,22 +17,24 @@ Routes.post('/signup', (req, res, next) => { // CHECKED
           photoUrl,
           position,
           birthday,
-          liking,
           facebookId,
           email,
           gender } = req.body;
-  if (!name || !nickname || !password || !position || !liking || !gender) {
+  if (!name || !nickname || !password || !gender) {
     res.status(400).json({ message: 'Please, provide all fields' });
     return;
   }
-  User.findOne({ name }, '_id')
+  User.findOne({ email }, '_id')
   .then(user => {
     if (user) {
       res.status(400).json({ message: 'The username already exists' });
       return;
     }
+    console.log("password");
+    console.log(password);
     const salt     = bcrypt.genSaltSync(10);
     const hashPass = bcrypt.hashSync(password, salt);
+    console.log(hashPass);
     const theUser = new User({
       name,
       nickname,
@@ -39,8 +42,6 @@ Routes.post('/signup', (req, res, next) => { // CHECKED
       photoUrl,
       position,
       birthday,
-      _liking:liking,
-      password,
       gender,
       email
     });
@@ -85,6 +86,17 @@ Routes.post('/login', (req, res, next) => {
       res.status(200).json(req.user);
     });
   })(req, res, next);
+});
+
+Routes.post('/edit/:id', (req, res, next) => {
+  console.log(req.params.id);
+  console.log(req.body);
+  User.findByIdAndUpdate(req.params.id,req.body)
+      .then((result) => res.status(200).json({ message: 'Success' }))
+      .catch((error) => {
+          console.log(error);
+          res.status(500).json({ message: error });
+        });
 });
 
 Routes.get('/logout', (req, res, next) => {

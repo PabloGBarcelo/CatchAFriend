@@ -8,33 +8,39 @@ import { AuthService } from '../../services/auth.service';
 })
 export class PortalPlanComponent implements OnInit {
   plans = [];
-  x:Number = 0;
+  x: Number = 0;
   body = {};
-  user:object;
-  constructor(private planService:PlanService, public auth:AuthService) {
+  user: object;
+  constructor(private planService: PlanService, public auth: AuthService) {
     this.user = this.auth.getUser();
   }
 
   ngOnInit() {
     // Get all info data.
-    if (this.user){
-      this.body['rush'] = false // Boolean
-      this.body['likingUser'] = this.auth.user['_liking'];
-      this.body['userId'] = this.auth.user['_id'];
-      this.body['gender'] = this.auth.user['gender'];
-      this.body['position'] = this.auth.user['position'];
-      this.body['typeSearch'] = 'Confort';
-      this.body['maxKilometers'] = this.auth.user['maxKilometers'];
-      this.planService.getPlans(this.body).subscribe( listOfPlans =>{
-        this.plans = listOfPlans;
-    });}
+    this.auth.isLoggedIn().subscribe(
+      (user) => {
+        this.body['rush'] = false // Boolean
+        this.body['likingUser'] = user['_liking'];
+        this.body['userId'] = user['_id'];
+        this.body['gender'] = user['gender'];
+        this.body['position'] = user['position'];
+        this.body['typeSearch'] = 'Confort';
+        this.body['maxKilometers'] = user['maxKilometers'];
+        this.planService.getPlans(this.body).subscribe(listOfPlans => {
+          console.log(listOfPlans);
+          this.plans = listOfPlans;
+        });
+      }),
+      (err) => {
+        console.log(err);
+      }
   }
 
-  likePlan(){
+  likePlan() {
 
   }
 
-  dislikePlan(){
+  dislikePlan() {
 
   }
 }
