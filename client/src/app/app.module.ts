@@ -21,9 +21,14 @@ import { ExtrasignupComponent } from './extrasignup/extrasignup.component';
 import { CategoriesService } from '../services/categories.service';
 import { SwipeComponent } from './swipe/swipe.component';
 import { MyPlansDetailComponent } from './my-plans-detail/my-plans-detail.component';
+import { ImageUploadModule } from "angular2-image-upload";
+import { AgmCoreModule } from '@agm/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { DateTimePickerModule } from 'ng-pick-datetime';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import 'hammerjs';
 import 'hammer-timejs';
-import { CreatePlanComponent } from './create-plan/create-plan.component';
+import { NewPlanComponent } from './new-plan/new-plan.component';
 
 @NgModule({
   declarations: [
@@ -40,13 +45,21 @@ import { CreatePlanComponent } from './create-plan/create-plan.component';
     ExtrasignupComponent,
     SwipeComponent,
     MyPlansDetailComponent,
-    CreatePlanComponent
+    NewPlanComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(myRoutes),
+    ImageUploadModule.forRoot(),
+    ReactiveFormsModule,
+    DateTimePickerModule,
+    AgmCoreModule.forRoot({
+     apiKey: "AIzaSyCU9On2sVtMW2yuerirL0yGkJ5KqL-A26o",
+     libraries: ["places"]
+   }),
   ],
   providers: [AuthService, PlanService, CategoriesService],
   bootstrap: [AppComponent]

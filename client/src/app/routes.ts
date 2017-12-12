@@ -12,6 +12,7 @@ import { ExtrasignupComponent } from './extrasignup/extrasignup.component';
 import { SwipeComponent } from './swipe/swipe.component';
 import { MyPlansDetailComponent } from './my-plans-detail/my-plans-detail.component';
 import { CreatePlanComponent } from './create-plan/create-plan.component';
+import { NewPlanComponent } from './new-plan/new-plan.component';
 
 const myRoutes: Routes = [
   { path: '',  component: LandingPageComponent },
@@ -26,8 +27,7 @@ const myRoutes: Routes = [
   { path: 'extrasignup',  component: ExtrasignupComponent },
   { path: 'welcome', redirectTo: 'extrasignup', pathMatch: 'full' },
   { path: 'swipe',  component: SwipeComponent },
-  { path: 'createplan',  component: CreatePlanComponent },
-
+  { path: 'createplan',  component: NewPlanComponent },
 
 ];
 

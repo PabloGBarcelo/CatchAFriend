@@ -1,6 +1,8 @@
 const express = require('express');
 const Plan = require('../models/Plan.model');
 const Routes = express.Router();
+var multer  = require('multer');
+var upload = multer({ dest: 'public/images/uploads/' });
 var _ = require('lodash');
 
 ObjectId = require('mongodb').ObjectID;
@@ -238,6 +240,15 @@ Routes.post('/newplan', (req, res, next) => { // CHECKED
 
     });
 
-
+    Routes.post('/uploadPhoto', upload.single('image'),(req, res, next) => {
+      if (req.file){
+        console.log("BACK");
+        console.log(req.file.path);
+        res.status(200).json(req.file.path);
+      } else {
+        res.status(500).json("some error");
+      }
+      console.log(req.file);
+    });
 
 module.exports = Routes;
