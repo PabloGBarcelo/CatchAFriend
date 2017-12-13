@@ -1,3 +1,26 @@
-<p>
-  my-chats-selected works!
-</p>
+<div *ngIf="this.user">
+  <ul>
+    <div *ngFor="let history of allHistory">
+      <div *ngIf=""> <!-- user -->
+        <b>{{m.user}}</b>: {{m.message}} {{ m.planId }}
+      </div>
+      <div *ngIf=""> <!-- other user -->
+        <b>{{m.user}}</b>: {{m.message}} {{ m.planId }}
+      </div>
+    </div>
+    <li *ngFor="let m of chat.messages">
+      <div *ngIf="m.planId == planId">
+        <b>{{m.user}}</b>: {{m.message}} {{ m.planId }}
+      </div>
+    </li>
+  </ul>
+  <input type="text" [(ngModel)]="m">
+  <button (click)="sendMessage(m)"> Send Message </button>
+</div>
+<ul>
+  <li><a [routerLink]="['/portal']">Plans</a></li>
+  <li><a [routerLink]="['/myplans']">My Plans</a></li>
+  <li class="selected">My Chats</li>
+  <li><a [routerLink]="['/lasthour']">Last Hour</a></li>
+  <li><a [routerLink]="['/settings']">Settings</a></li>
+</ul>

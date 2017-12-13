@@ -1,12 +1,17 @@
-<p>
-  my-chats works!
-</p>
-<ul>
-  <li *ngFor="let m of chat.messages"><b>{{m.user}}</b>: {{m.message}} {{ m.planId }}</li>
-</ul>
-<input type="text" [(ngModel)]="m">
-<button (click)="chat.sendMessage(m); m=''"> Send Message </button>
-
+<div *ngIf="this.user">
+  <div *ngFor="let chats of chatsUser">
+    <a [routerLink] = "['/mychats',chats.planId._id]">
+    <div class="plan">
+      {{ chats.planId.title}}
+    </div>
+    <div class="date">
+      {{ chats.planId.datePlan }}
+    </div>
+  </a>
+  </div>
+  <input type="text" [(ngModel)]="m">
+  <button (click)="sendMessage(m)"> Send Message </button>
+</div>
 <ul>
   <li><a [routerLink]="['/portal']">Plans</a></li>
   <li><a [routerLink]="['/myplans']">My Plans</a></li>

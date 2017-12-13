@@ -11,7 +11,8 @@ module.exports = (app) => {
       socket.broadcast.emit('recibe-message', {
         sender: socket.id,
         message: data.message,
-        planId: data.planId
+        planId: data.planId,
+        senderId: data.senderId
       });
     });
   });

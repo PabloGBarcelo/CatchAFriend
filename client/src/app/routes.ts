@@ -13,6 +13,7 @@ import { SwipeComponent } from './swipe/swipe.component';
 import { MyPlansDetailComponent } from './my-plans-detail/my-plans-detail.component';
 import { NewPlanComponent } from './new-plan/new-plan.component';
 import { DetailRequestAndEditPlanComponent } from './detail-request-and-edit-plan/detail-request-and-edit-plan.component';
+import { MyChatsSelectedComponent } from './my-chats-selected/my-chats-selected.component';
 
 const myRoutes: Routes = [
   { path: '',  component: LandingPageComponent },
@@ -29,6 +30,7 @@ const myRoutes: Routes = [
   { path: 'swipe',  component: SwipeComponent },
   { path: 'createplan',  component: NewPlanComponent },
   { path: 'myplans/editplan/:id',  component: DetailRequestAndEditPlanComponent },
+  { path: 'mychats/:id',  component: MyChatsSelectedComponent },
 ];
 
 export { myRoutes };

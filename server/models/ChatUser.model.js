@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
 
 const chatUserSchema = new Schema({
-  idChat: { type:Schema.Types.ObjectId, required:true, Ref:'Chat' },
-  userId: { type:Schema.Types.ObjectId, required:true, Ref:'User' },
+  planId: { type:Schema.Types.ObjectId, required:true, ref:'Plan' },
+  userId: { type:Schema.Types.ObjectId, required:true, ref:'User' },
   status: { type:String, enum:['in','out'], default:'in' },
 }, {
   timestamps: {
@@ -13,4 +13,4 @@ const chatUserSchema = new Schema({
 });
 
 const ChatUser = mongoose.model('ChatUser', chatUserSchema);
-module.exports = Chat;
+module.exports = ChatUser;
