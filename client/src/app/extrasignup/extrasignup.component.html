@@ -5,8 +5,26 @@ birthday,
 _liking,
  -->
 
-SELECT YOUR LIKING! (at least one)
-<input type="date" [(ngModel)]="birthday">
+ <div class="logoHeader">
+   <img src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513114677/logoHeader_fwizao.png">
+ </div>
+ <div class="locationActivate">
+   <div class="locate1">
+     <i class="fa fa-map-marker position1" aria-hidden="true"></i>
+   </div>
+   <div class="locate2">
+    <br> We take your position <br>to offer best plans near you
+   </div>
+</div>
+ <div class="tagBirthday">
+  <span>When is your birthday?</span>
+ </div>
+ <div class="birthday">
+   <input type="date" class="inputbirthday"[(ngModel)]="birthday">
+ </div>
+ <div class="selectYourLiking">
+  <span>most important!!<br>SELECT YOUR LIKING! <br>(at least one)</span>
+</div>
 <form #myForm="ngForm" (submit)="SendFormAndEnjoy(myForm)">
 <div *ngFor="let categorie of allCategories">
   <label>
@@ -14,5 +32,7 @@ SELECT YOUR LIKING! (at least one)
         {{ categorie.name }}
     </label>
 </div>
-<button type="submit">SEND</button>
+<div class="buttonSendAndEnterInPortal">
+  <button class="buttonSendAndEnter" type="submit">START THE PARTY!</button>
+</div>
 </form>

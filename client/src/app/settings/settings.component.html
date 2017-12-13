@@ -1,28 +1,61 @@
+<div class="logoHeader">
+  <img src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513114677/logoHeader_fwizao.png">
+</div>
 <div *ngIf="this.user">
   <div class="phototop">
-    <img [src]="user.photoUrl[0]">
+    <span>PROFILE</span>
+    <img class="photoCircle"[src]="user.photoUrl[0]">
   </div>
-  <div class="name">
-    Welcome to your area {{ this.user.nickname }}
+  <div class="welcome">
+    Welcome to your area <br>{{ this.user.nickname }}
   </div>
   <div *ngIf="show" class="profileHidden">
     <form (ngSubmit)="doSomething(formData)" #formData="ngForm">
-      Email:
-      <input type="text" name="email" [value]="user.email"> Nick:
-      <input type="text" name="nickname" [value]="user.nickname"> Photo:
-      <input type="file" name="photo"> Categories: Kilometers ({{ this.rangeKilometers }}):
-      <input type="range" #range (input)="updateKilometers(range.value)" min="10" max="500" [value]="user.maxKilometers">
-      <button type="submit">Save profile</button>
-      <button (click)="this.show=!this.show">Cancel Changes</button>
+    <div class="emailtag">
+      <p>Email:</p>
+    </div>
+    <div class="emailinput">
+      <input type="text" name="email" [value]="user.email">
+    </div>
+    <div class="nicktag">
+      Nick:
+    </div>
+    <div class="nickinput">
+      <input type="text" name="nickname" [value]="user.nickname">
+    </div>
+    <div class="phototag">
+      Photo:
+    </div>
+    <div class="fileupinput">
+      <input class="fileup" type="file" name="photo">
+    </div>
+    <div class="kilometerstag">
+      Kilometers ({{ this.rangeKilometers }}):
+    </div>
+    <div class="rangeinput">
+      <input type="range" #range (input)="updateKilometers(range.value)" min="10" max="300" [value]="user.maxKilometers">
+    </div>
+      <div class="buttons">
+        <div class="acceptChanges">
+          <button type="submit">Save profile</button>
+        </div>
+        <div class="cancelChanges">
+          <button (click)="this.show=!this.show">Cancel Changes</button>
+        </div>
+      </div>
     </form>
   </div>
 </div>
-<div *ngIf="!this.show">
-  <button (click)="changeStatusProfile()"> Edit/Close Profile </button>
+<div class="showButton" *ngIf="!this.show">
+  <button (click)="changeStatusProfile()"> Edit info/settings </button>
 </div>
+<div class="showButton" *ngIf="!this.show">
+  <button (click)="changeLikings()"> Change Likings </button>
+</div>
+<div class="closeSession">
   <button (click)="logout()">Close Session!</button>
-
-<ul>
+</div>
+<ul class="bottomMenu">
   <li><a [routerLink]="['/portal']">Plans</a></li>
   <li><a [routerLink]="['/myplans']">My Plans</a></li>
   <li><a [routerLink]="['/mychats']">My Chats</a></li>

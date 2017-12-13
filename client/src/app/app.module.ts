@@ -24,12 +24,15 @@ import { MyPlansDetailComponent } from './my-plans-detail/my-plans-detail.compon
 import { ImageUploadModule } from "angular2-image-upload";
 import { AgmCoreModule } from '@agm/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { DateTimePickerModule } from 'ng-pick-datetime';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import 'hammerjs';
 import 'hammer-timejs';
 import { NewPlanComponent } from './new-plan/new-plan.component';
-
+import {CalendarModule} from 'primeng/primeng';
+import * as $ from 'jquery';
+import { DetailRequestAndEditPlanComponent } from './detail-request-and-edit-plan/detail-request-and-edit-plan.component';
+import { MomentModule } from 'angular2-moment/moment.module';
+import * as moment from 'moment';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +48,8 @@ import { NewPlanComponent } from './new-plan/new-plan.component';
     ExtrasignupComponent,
     SwipeComponent,
     MyPlansDetailComponent,
-    NewPlanComponent
+    NewPlanComponent,
+    DetailRequestAndEditPlanComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +59,8 @@ import { NewPlanComponent } from './new-plan/new-plan.component';
     RouterModule.forRoot(myRoutes),
     ImageUploadModule.forRoot(),
     ReactiveFormsModule,
-    DateTimePickerModule,
+    CalendarModule,
+    MomentModule,
     AgmCoreModule.forRoot({
      apiKey: "AIzaSyCU9On2sVtMW2yuerirL0yGkJ5KqL-A26o",
      libraries: ["places"]

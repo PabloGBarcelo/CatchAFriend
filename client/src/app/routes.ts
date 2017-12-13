@@ -11,8 +11,8 @@ import { SignupComponent } from './signup/signup.component';
 import { ExtrasignupComponent } from './extrasignup/extrasignup.component';
 import { SwipeComponent } from './swipe/swipe.component';
 import { MyPlansDetailComponent } from './my-plans-detail/my-plans-detail.component';
-import { CreatePlanComponent } from './create-plan/create-plan.component';
 import { NewPlanComponent } from './new-plan/new-plan.component';
+import { DetailRequestAndEditPlanComponent } from './detail-request-and-edit-plan/detail-request-and-edit-plan.component';
 
 const myRoutes: Routes = [
   { path: '',  component: LandingPageComponent },
@@ -28,7 +28,7 @@ const myRoutes: Routes = [
   { path: 'welcome', redirectTo: 'extrasignup', pathMatch: 'full' },
   { path: 'swipe',  component: SwipeComponent },
   { path: 'createplan',  component: NewPlanComponent },
-
+  { path: 'myplans/editplan/:id',  component: DetailRequestAndEditPlanComponent },
 ];
 
 export { myRoutes };

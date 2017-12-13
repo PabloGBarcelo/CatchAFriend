@@ -3,6 +3,10 @@ import { ElementRef, NgZone, ViewChild, Renderer2 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { } from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
+import { PlanService } from '../../services/plan.service';
+import { Router } from '@angular/router';
+import { CategoriesService } from '../../services/categories.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-new-plan',
@@ -20,10 +24,31 @@ export class NewPlanComponent implements OnInit {
 
  plan:object={};
  photo:object={};
- constructor(private mapsAPILoader: MapsAPILoader,
-   private ngZone: NgZone) { }
+ containerCategoresId:Array<string>=[];
+ categorie;
+ allCategories;
+ userId;
+ constructor(
+   private mapsAPILoader: MapsAPILoader,
+   private auth: AuthService,
+   private ngZone: NgZone,
+   public categories:CategoriesService,
+   private forSendPlan:PlanService,
+   private router:Router) { }
 
  ngOnInit() {
+   this.categories.getAllCategories().subscribe(
+     (categories) => {
+       this.allCategories = categories;
+     });
+
+   this.auth.isLoggedIn().subscribe(
+     (user) => {
+       this.userId = user['_id'];
+     },
+     (err) => {
+       console.log(err);
+     });
    //set google maps defaults
      this.zoom = 4;
      this.latitude = 39.8282;
@@ -70,15 +95,34 @@ export class NewPlanComponent implements OnInit {
        });
      }
    }
-   sendPlan(){
+   sendPlan(categories){
+     let keys = Object.keys(categories.value);
+
+      this.categorie = keys.filter(function(key) {
+         return categories.value[key]
+      });
+      this.containerCategoresId = [];
+     this.categorie.forEach(e => {
+       this.containerCategoresId.push(e);
+     });
+     this.plan['_owner'] = this.userId;
+     this.plan['_category'] = this.containerCategoresId;
      this.plan['status'] = "running";
-     this.plan.photo = Object.values(this.photo);
+     this.plan['photo'] = Object.values(this.photo);
+     console.log("PLAN")
      console.log(this.plan);
+     this.forSendPlan.addPlan(this.plan).subscribe(
+       () =>{
+         this.router.navigate(['/myplans'])
+       },
+        (error) =>{
+          console.log(error);
+        });
    }
 
    onUploadFinished(e){
      // ATTENTION WITH DOUBLE ""
-     this.photo[e.file.name] = e.serverResponse._body;
+     this.photo[e.file.name] = e.serverResponse._body.slice(1,-1);
      console.log(e);
      console.log(this.photo);
    }

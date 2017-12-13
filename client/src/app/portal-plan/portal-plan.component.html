@@ -1,67 +1,61 @@
 <div>
-
-    <div *ngIf="this.plans[this.x]">
-      <div class="thing-to-move"
-       (panstart)="onPanStart($event)"
-       (panmove)="onPan($event)"
-       (panEnd)="onPanEnd($event)">
-         <div [style.marginLeft.px]="placeX">
-      <div class="photoPlan">
-        <img width="300px" [src]="this.plans[this.x].photo[0]">
+  <div *ngIf="this.plans[this.x]">
+    <div class="thing-to-move" (panstart)="onPanStart($event)" (panmove)="onPan($event)" (panEnd)="onPanEnd($event)">
+      <div [style.marginLeft.px]="placeX">
+        <div class="photoPlan">
+          <img width="300px" [src]="this.plans[this.x].photo[0]">
+        </div>
       </div>
-    </div>
-  </div>
-    <div class="dataHeader">
-      {{ placeX }}, {{ placeY }}
-      <div class="owner">
-        <img width="50px"[src]="this.plans[this.x]._owner[0].photoUrl">
-        {{ this.plans[this.x]._owner[0].nickname }}
+      <div class="dataHeader">
+        <div class="owner">
+          <img width="50px" [src]="this.plans[this.x]._owner[0].photoUrl"> {{ this.plans[this.x]._owner[0].nickname }}
+        </div>
+        <div class="dataDate">
+          {{ this.plans[this.x].datePlan }}
+        </div>
+        <div class="numberPeople">
+          {{ this.plans[this.x].maxPeople - this.plans[this.x]._acceptRequest.length}} ({{ this.plans[this.x].maxPeople}}) img persona
+        </div>
       </div>
-      <div class="dataDate">
-        {{ this.plans[this.x].datePlan }}
+      <div class="title">
+        {{ this.plans[this.x].title }}
       </div>
-      <div class="numberPeople">
-        {{ this.plans[this.x].maxPeople - this.plans[this.x]._acceptRequest.length}} ({{ this.plans[this.x].maxPeople}}) img persona
+      <div class="description">
+        {{ this.plans[this.x].description }}
       </div>
-    </div>
-    <div class="title">
-      {{ this.plans[this.x].title }}
-    </div>
-    <div class="description">
-      {{ this.plans[this.x].description }}
-    </div>
-    <div class="positionText">
-      {{ this.plans[this.x].position.name }}
-    </div>
-    <div class="transportPrice">
-      <div class="transport">
-        {{this.plans[this.x].transport}}
+      <div class="positionText">
+        {{ this.plans[this.x].position.name }}
       </div>
-      <div class="price" *ngIf="this.plans[this.x].money == 0">
-        FREE
-      </div>
-      <div class="price" *ngIf="this.plans[this.x].money > 0">
-        {{this.plans[this.x].price}}
-      </div>
-
-      <div>
+      <div class="transportPrice">
+        <div class="transport">
+          {{this.plans[this.x].transport}}
+        </div>
+        <div class="price" *ngIf="this.plans[this.x].money == 0">
+          FREE
+        </div>
+        <div class="price" *ngIf="this.plans[this.x].money > 0">
+          {{this.plans[this.x].money}}
+        </div>
       </div>
     </div>
   </div>
   <p>FILTER</p>
   <ul>
-    <li><div *ngIf="this.typeSearch == 'Confort'">Confort Zone</div>
-        <div *ngIf="this.typeSearch != 'Confort'"><button (click)="setConfort()">Confort Zone</button></div>
+    <li>
+      <div *ngIf="this.typeSearch == 'Confort'">Confort Zone</div>
+      <div *ngIf="this.typeSearch != 'Confort'"><button (click)="setConfort()">Confort Zone</button></div>
     </li>
 
-    <li><div *ngIf="this.typeSearch == 'Explore'"> Explore </div>
-        <div *ngIf="this.typeSearch != 'Explore'"><button (click)="setExplore()">Explore</button></div>
-    </li>
-    <li><div *ngIf="this.typeSearch == 'Random'"> Random</div>
-        <div *ngIf="this.typeSearch != 'Random'"><button (click)="setRandom()">Random</button></div>
+    <li>
+      <div *ngIf="this.typeSearch == 'Explore'"> Explore </div>
+      <div *ngIf="this.typeSearch != 'Explore'"><button (click)="setExplore()">Explore</button></div>
     </li>
     <li>
-      <input type="checkbox" name="rush" (change)="setRush($event)"S>
+      <div *ngIf="this.typeSearch == 'Random'"> Random</div>
+      <div *ngIf="this.typeSearch != 'Random'"><button (click)="setRandom()">Random</button></div>
+    </li>
+    <li>
+      <input type="checkbox" name="rush" (change)="setRush($event)" S>
     </li>
   </ul>
   <ul>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PlanService } from '../../services/plan.service';
 import { AuthService } from '../../services/auth.service';
+import * as moment from 'moment';
 @Component({
   selector: 'app-portal-plan',
   templateUrl: './portal-plan.component.html',
@@ -22,6 +23,7 @@ export class PortalPlanComponent implements OnInit {
   totalPlace: number = 0;
   typeSearch: string ="Confort"
   rush:Boolean = false;
+  years;
   idUser;
   constructor(private planService: PlanService, public auth: AuthService) {
     this.user = this.auth.getUser();
@@ -39,6 +41,9 @@ export class PortalPlanComponent implements OnInit {
     this.auth.isLoggedIn().subscribe(
       (user) => {
         this.idUser = user['_id'];
+        // this.years = user['birthday'] - Date.now();
+        // this.years = moment.duration(user['birthday'].diff(Date.now()));
+        // console.log("YEARS "+ this.years); // 8 years
         this.body['rush'] = this.rush // Boolean
         this.body['likingUser'] = user['_liking'];
         this.body['userId'] = user['_id'];
@@ -48,6 +53,7 @@ export class PortalPlanComponent implements OnInit {
         this.body['maxKilometers'] = user['maxKilometers'];
         this.planService.getPlans(this.body).subscribe(listOfPlans => {
           console.log(listOfPlans);
+          console.log("Asignando");
           this.plans = listOfPlans;
         });
       }),
@@ -117,16 +123,19 @@ export class PortalPlanComponent implements OnInit {
   }
 
   setConfort(){
+    this.plans=[];
     this.typeSearch = "Confort";
     this.takePlans();
   }
 
   setExplore(){
+    this.plans=[];
     this.typeSearch = "Explore";
     this.takePlans();
   }
 
   setRandom(){
+    this.plans=[];
     this.typeSearch = "Random";
     this.takePlans();
   }

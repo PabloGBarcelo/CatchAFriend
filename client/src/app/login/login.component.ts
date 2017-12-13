@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+// import slide in/out animation
+import { slideInOutAnimation } from '../../_animations/index';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  animations: [slideInOutAnimation],
 })
 export class LoginComponent implements OnInit {
 

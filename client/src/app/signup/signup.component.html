@@ -18,16 +18,64 @@ photoUrl,
 
 -->
 <div *ngIf="!statusLogin">
-  <input type="radio" value="particular" [(ngModel)]="register.role">particular
-  <input type="radio" value="business" [(ngModel)]="register.role">business
-  <button (click)="tostep2()"> Login </button>
+  <div class="logoHeader">
+    <img src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513114677/logoHeader_fwizao.png">
+  </div>
+  <div class="welcome">
+    <span>HELLO!</span>
+  </div>
+  <div class="youAre">
+    <span>YOU ARE...</span>
+  </div>
+  <div class="particularSignUp">
+    <button class="particularButton" (click)="register.role='particular';tostep2()"> PARTICULAR </button>
+  </div>
+  <div class="businessSignUp">
+    <button class="businessButton" (click)="register.role='business';tostep2()"> BUSINESS </button>
+  </div>
 </div>
 <div *ngIf="statusLogin">
-  <input type="radio" value="male" [(ngModel)]="register.gender">MALE
-  <input type="radio" value="female" [(ngModel)]="register.gender">FEMALE
-  <input type="text" name="name" [(ngModel)]="register.name" placeHolder="name">
-  <input type="text" name="email" [(ngModel)]="register.email" placeHolder="email">
-  <input type="text" name="name" [(ngModel)]="register.nickname" placeHolder="nickname">
-  <input type="password" name="password" [(ngModel)]="register.password" placeHolder="password">
-  <button (click)="flyLittleBird()"> Login </button>
+  <div class="logoHeader">
+    <img src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513114677/logoHeader_fwizao.png">
+  </div>
+  <div class="talkAboutYou">
+    <span>Let's talk about you...</span>
+  </div>
+  <div class="imSignUp">
+    <span>I'm...</span>
+  </div>
+  <div class="gender">
+    <input type="radio" name="rb" id="rb1" value="male" [(ngModel)]="register.gender">MALE
+    <input type="radio" name="rb" id="rb2" value="female" [(ngModel)]="register.gender">FEMALE
+  </div>
+  <div class="nameSignup">
+    <span>What's your name?</span>
+  </div>
+  <div class="nameInput">
+    <input class="nameinput" type="text" name="name" [(ngModel)]="register.name" placeHolder="name">
+  </div>
+  <div class="emailSignup">
+    <span>and your email is...</span>
+  </div>
+  <div class="emailInput">
+    <input class="emailinput" type="text" name="email" [(ngModel)]="register.email" placeHolder="email">
+  </div>
+  <div class="nicknameSignup">
+    <span>What Should Be Your Nickname? (need one!)</span>
+  </div>
+  <div class="nicknameInput">
+    <input class="nickinput" type="text" name="name" [(ngModel)]="register.nickname" placeHolder="nickname">
+  </div>
+  <div class="passSignup">
+    <span>Password! (Nobody is looking?)</span>
+  </div>
+  <div class="passInput">
+    <input class="passinput" type="password" name="password" [(ngModel)]="register.password" placeHolder="password">
+  </div>
+  <div class="buttonNext">
+    <button class="buttonNextStepSignup" (click)="flyLittleBird()"> LETS GO! </button>
+  </div>
+  <div class="back">
+    <a [routerLink]='[""]'>back</a><br><br>
+  </div>
 </div>

@@ -1,0 +1,101 @@
+.logoHeader{
+  margin: 0 auto;
+  text-align: center;
+  padding: 10px;
+}
+
+.selectYourLiking{
+  margin: 0 auto;
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+  font-size: 30px;
+  font-weight: 100;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.tagBirthday {
+    margin: 0 auto;
+    text-align: center;
+    font-weight: 700;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.inputbirthday{
+    margin: 0 auto;
+    text-align: center;
+    border-bottom: 1px solid gainsboro;
+    width: 70%;
+    color: #F25851;
+}
+
+.birthday{
+  margin:0 auto;
+  text-align: center;
+}
+
+.inputbirthday {
+    margin: 0 auto;
+    text-align: center;
+    border-bottom: 1px solid gainsboro;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    width: 55%;
+}
+
+.position1 {
+    font-size: 40px;
+    color: #F25850;
+}
+
+.locate1 {
+  display: inline-block;
+  width: 20%;
+  text-align: right;
+  margin-right: 20px;
+}
+.locate2 {
+    display: inline-block;
+    width: 62%;
+    text-align: left;
+}
+
+.locationActivate {
+    margin: 0 auto;
+    text-align: center;
+        margin-bottom: 25px;
+}
+
+.buttonSendAndEnterInPortal {
+    margin: 0 auto;
+    text-align: center;
+    width: 70%;
+    background: #F25850;
+    color: white;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #F25850;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #F25850;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #F25850;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #F25850;
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+   color:    #F25850;
+}
+
+::placeholder { /* Most modern browsers support this now. */
+   color:    #F25850;
+}

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {  PlanService } from '../../services/plan.service';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-my-plans',
   templateUrl: './my-plans.component.html',
@@ -9,7 +10,7 @@ import { AuthService } from '../../services/auth.service';
 export class MyPlansComponent implements OnInit {
   userPlans:Array<object>;
   user;
-  constructor(public planService: PlanService, public auth: AuthService) { }
+  constructor(public planService: PlanService, public auth: AuthService, public router:Router) { }
 
   ngOnInit() {
     this.auth.isLoggedIn().subscribe(
@@ -36,4 +37,5 @@ export class MyPlansComponent implements OnInit {
         this.userPlans = plans;
       }, (err) => { console.log(err) });
   }
+
 }

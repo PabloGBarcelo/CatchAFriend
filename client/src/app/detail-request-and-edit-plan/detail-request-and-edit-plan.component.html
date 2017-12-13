@@ -1,0 +1,55 @@
+<div *ngIf="myPlan">
+  <div class="photoPlan">
+    <img width="300px" [src]="myPlan.photo[0]">
+  </div>
+  <div class="dataDate">
+    {{ myPlan.datePlan }}
+  </div>
+  <div class="numberPeople">
+    {{ myPlan.maxPeople - myPlan._acceptRequest.length}}
+    ({{ myPlan.maxPeople}}) img persona
+  </div>
+  <div class="title">
+    {{ myPlan.title }}
+  </div>
+  <div class="description">
+    {{ myPlan.description }}
+  </div>
+  <div class="positionText">
+    {{ myPlan.position.name }}
+  </div>
+  <div class="transportPrice">
+    <div class="transport">
+      {{myPlan.transport}}
+    </div>
+    <div class="price" *ngIf="myPlan.money == 0">
+      FREE
+    </div>
+    <div class="price" *ngIf="myPlan.money > 0">
+      {{myPlan.money}}
+    </div>
+  </div>
+  <div *ngFor="let request of myPlan._usersRequest">
+    {{ request.name }}
+    // Here accept or deny, if press in person show person detail
+  </div>
+</div>
+<a [routerLink]="['/myplans']">Go back</a>
+<ul>
+  <li><a [routerLink]="['/portal']">Plans</a></li>
+  <li class="selected">My Plans</li>
+  <li><a [routerLink]="['/mychats']">My Chats</a></li>
+  <li><a [routerLink]="['/lasthour']">Last Hour</a></li>
+  <li><a [routerLink]="['/settings']">Settings</a></li>
+</ul>
+
+<div id="footer">
+  <div class="col-xs-12 navbar-inverse navbar-fixed-bottom">
+  <div class="row" id="bottomNav">
+    <div class="col-xs-3 text-center"><a href="#"><i class="glyphicon glyphicon-circle-arrow-left"></i><br>Link</a></div>
+    <div class="col-xs-3 text-center"><a href="#"><i class="glyphicon glyphicon-circle-arrow-down"></i><br>Link</a></div>
+    <div class="col-xs-3 text-center"><a href="#"><i class="glyphicon glyphicon-circle-arrow-right"></i><br>Link</a></div>
+    <div class="col-xs-3 text-center"><a href="#"><i class="glyphicon glyphicon-circle-arrow-right"></i><br>Link</a></div>
+  </div>
+  </div>
+</div>

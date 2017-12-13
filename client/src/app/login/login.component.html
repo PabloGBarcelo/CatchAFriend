@@ -1,18 +1,30 @@
+<div class="logoHeader">
+  <img src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513114677/logoHeader_fwizao.png">
+</div>
 <form>
-  <p> email
-    <input type="text" name="email" [(ngModel)]="email" required />
-  </p>
-  <p> password
-    <input type="password" name="password" [(ngModel)]="password" required />
-  </p>
-  <button (click)="login(email,password)"> Login </button>
+  <div class="emailtag">
+    <span>email</span>
+  </div>
+  <div class="emailInput">
+    <input class="emailinput" type="text" name="email" [(ngModel)]="email" placeholder="Insert your email" required />
+  </div>
+
+  <div class="passwordtag">
+    <span>password</span>
+  </div>
+  <div class="passInput">
+    <input class="passinput" type="password" name="password" [(ngModel)]="password" placeholder="Insert your password" required />
+  </div>
+  <div class="divGo">
+    <button class="botonGo" (click)="login(email,password)"> GO! </button>
+  </div>
 </form>
 <div>
   <p class="error"> {{ this.error }} </p>
 </div>
-
-or <a [routerLink]="['/signup']">create new account</a><br>
-<br>
-<a [routerLink]="['forgot']">Forgot your password?</a>
-
-<a [routerLink]='[""]'>back</a><br><br>
+<div class="createNewAccount">
+  <a [routerLink]="['/signup']">create new account</a><br>
+</div>
+<div class="back">
+  <a [routerLink]='[""]'>back</a><br><br>
+</div>

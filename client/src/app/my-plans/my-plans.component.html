@@ -12,9 +12,21 @@
     {{ plan.maxPeople }}
   </div>
   </a>
-  <div class="remove">
+  <div *ngIf="plan._owner == user._id">
+    Im the owner
+    <div *ngIf="plan._usersRequest.length > 0">
+      <!-- When have new request can check and decide -->
+      <a [routerLink]="['editplan',plan._id]">check New Requests</a>
+    </div>
+  </div>
+  <div class="remove" *ngIf="plan._owner != user._id && plan._usersRequest.includes(user._id)">
+    <!-- User waiting can cancel plan-->
     <button (click)="removePlan([plan._id])">Reject this plan</button>
   </div>
+  <div class="accepted" *ngIf="plan._acceptRequest.includes(user._id)">
+    Plan Accepted!
+  </div>
+
 </div>
 <div class="newPlan">
   <a [routerLink]="['/createplan']">ADD NEW PLAN</a>
@@ -26,3 +38,21 @@
   <li><a [routerLink]="['/lasthour']">Last Hour</a></li>
   <li><a [routerLink]="['/settings']">Settings</a></li>
 </ul>
+<!--
+$or: [{
+  "_acceptRequest": {
+    $in: [user]
+  }
+}, {
+  "_usersRequest": {
+    $in: [user]
+  }
+}, {
+  "_rejectedId": {
+    $in: [user]
+  }
+},{
+    "_owner": {
+    $in: [user]
+  }
+}] -->

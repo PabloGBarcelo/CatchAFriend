@@ -20,9 +20,11 @@ export class SignupComponent implements OnInit {
   }
 
   tostep2(){
+    console.log(this.register);
     this.statusLogin = !this.statusLogin;
   }
   flyLittleBird(){
+    this.register['photoUrl'] = ["https://cdn.vectorstock.com/i/thumb-large/71/60/kawaii-cartoon-face-vector-15307160.jpg"];
     this.auth.signup(this.register).subscribe(
       (user) => {
         this.ngZone.run(() =>

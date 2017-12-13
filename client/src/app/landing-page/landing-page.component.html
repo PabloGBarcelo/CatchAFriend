@@ -1,10 +1,24 @@
-<p>
-  WELCOME
-</p>
+<div class="containerWelcome">
+  <div class="imageTopWelcome">
+    <img src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513113289/freeWelcomelowres_alulcb.png">
+  </div>
+  <div class="welcome">
+    <span>WELCOME!</span>
+  </div>
+  <div class="buttonLoginFacebook">
+  <a href="{{ this.urlFacebook }}">
+    Login with Facebook
+  </a>
+  </div>
+  <div class="buttonLoginEmail">
+  <a [routerLink]="['login']">
+    Login with email
+  </a>
+  </div>
+  <div class="imageWelcome">
+    <img src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513112608/logo_xw58wm.png">
+  </div>
+  <div class="backgroundRed">
+  </div>
 
-<a href="{{ this.urlFacebook }}">
-  Login with Facebook
-</a><br><br>
-<a [routerLink]="['login']">
-  Login with email
-</a>
+</div>

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoriesService } from '../../services/categories.service';
+// Declaramos las variables para jQuery
+declare var jQuery:any;
+declare var $:any;
 @Component({
   selector: 'app-extrasignup',
   templateUrl: './extrasignup.component.html',
