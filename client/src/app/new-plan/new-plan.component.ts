@@ -97,11 +97,10 @@ export class NewPlanComponent implements OnInit {
    }
    sendPlan(categories){
      let keys = Object.keys(categories.value);
-
-      this.categorie = keys.filter(function(key) {
+     this.categorie = keys.filter(function(key) {
          return categories.value[key]
       });
-      this.containerCategoresId = [];
+     this.containerCategoresId = [];
      this.categorie.forEach(e => {
        this.containerCategoresId.push(e);
      });

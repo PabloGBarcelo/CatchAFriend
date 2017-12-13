@@ -2,23 +2,31 @@ require('dotenv').config();
 const express = require('express');
 const Plan = require('../models/Plan.model');
 const Routes = express.Router();
-var multer = require('multer');
 const nodemailer = require('nodemailer');
-var upload = multer({
-  dest: 'public/images/uploads/'
-});
+// var upload = multer({
+//   dest: 'public/images/uploads/'
+// });
 var _ = require('lodash');
-var multerCloudinary = require('multer-cloudinary');
-var Cloudinary = require('cloudinary');
-Cloudinary.config({
-    cloud_name: 'dvm5v31jc',
-    api_key: '829135383828483',
-    api_secret: 'p4P0YtXN9ih6l9NKdGcexE8yCK8',
+var cloudinary = require('cloudinary');
+var cloudinaryStorage = require('multer-storage-cloudinary');
+var multer = require('multer');
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_KEY,
+    api_secret: process.env.CLOUDINARY_SECRET
 });
-var cloudinaryStorage = multerCloudinary({cloudinary: Cloudinary});
-var cloudinaryUpload = multer({storage: cloudinaryStorage});
 
-router.put('/me', cloudinaryUpload.fields([{name: 'cover', maxCount:1}]));
+var storage = cloudinaryStorage({
+  cloudinary: cloudinary,
+  folder: 'catchafriend',
+  allowedFormats: ['jpg', 'png'],
+  filename: function (req, file, cb) {
+    cb(undefined, 'my-file-name');
+  }
+});
+
+var parser = multer({ storage: storage });
+
 ObjectId = require('mongodb').ObjectID;
 
 Routes.post('/newplan', (req, res, next) => { // CHECKED
@@ -415,11 +423,9 @@ Routes.post('/plan/:planId/accept/:userId', (req, res, next) => { // CHECKED
 
 });
 
-Routes.post('/uploadPhoto', upload.single('image'), (req, res, next) => {
+Routes.post('/uploadPhoto', parser.single('image'), (req, res, next) => {
   if (req.file) {
-    console.log("BACK");
-    console.log(req.file.path);
-    res.status(200).json(req.file.path);
+    res.status(200).json(req.file.url);
   } else {
     res.status(500).json("some error");
   }
