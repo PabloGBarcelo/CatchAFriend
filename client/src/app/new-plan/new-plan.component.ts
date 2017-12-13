@@ -121,7 +121,10 @@ export class NewPlanComponent implements OnInit {
 
    onUploadFinished(e){
      // ATTENTION WITH DOUBLE ""
+
      this.photo[e.file.name] = e.serverResponse._body.slice(1,-1);
+     if (this.photo[e.file.name] == "some error")
+       delete this.photo[e.file.name];
      console.log(e);
      console.log(this.photo);
    }

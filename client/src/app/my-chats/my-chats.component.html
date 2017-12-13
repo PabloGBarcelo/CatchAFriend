@@ -2,6 +2,12 @@
   my-chats works!
 </p>
 <ul>
+  <li *ngFor="let m of chat.messages"><b>{{m.user}}</b>: {{m.message}}</li>
+</ul>
+<input type="text" [(ngModel)]="m">
+<button (click)="chat.sendMessage(m); m=''"> Send Message </button>
+
+<ul>
   <li><a [routerLink]="['/portal']">Plans</a></li>
   <li><a [routerLink]="['/myplans']">My Plans</a></li>
   <li class="selected">My Chats</li>
