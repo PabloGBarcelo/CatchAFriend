@@ -2,7 +2,7 @@
   my-chats works!
 </p>
 <ul>
-  <li *ngFor="let m of chat.messages"><b>{{m.user}}</b>: {{m.message}}</li>
+  <li *ngFor="let m of chat.messages"><b>{{m.user}}</b>: {{m.message}} {{ m.planId }}</li>
 </ul>
 <input type="text" [(ngModel)]="m">
 <button (click)="chat.sendMessage(m); m=''"> Send Message </button>

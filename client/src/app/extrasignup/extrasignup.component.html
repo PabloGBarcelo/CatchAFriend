@@ -26,13 +26,13 @@ _liking,
   <span>most important!!<br>SELECT YOUR LIKING! <br>(at least one)</span>
 </div>
 <form #myForm="ngForm" (submit)="SendFormAndEnjoy(myForm)">
-<div *ngFor="let categorie of allCategories">
-  <label>
-        <input type="checkbox" name="{{ categorie._id }}" value="{{ categorie._id }}" ngModel/>
-        {{ categorie.name }}
-    </label>
-</div>
-<div class="buttonSendAndEnterInPortal">
-  <button class="buttonSendAndEnter" type="submit">START THE PARTY!</button>
-</div>
+  <div *ngFor="let categorie of allCategories">
+    <label>
+          <input type="checkbox" name="{{ categorie._id }}" value="{{ categorie._id }}" ngModel/>
+          {{ categorie.name }}
+      </label>
+  </div>
+  <div class="buttonSendAndEnterInPortal">
+    <button class="buttonSendAndEnter" type="submit">START THE PARTY!</button>
+  </div>
 </form>

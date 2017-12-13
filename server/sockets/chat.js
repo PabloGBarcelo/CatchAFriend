@@ -9,8 +9,9 @@ module.exports = (app) => {
     socket.on('send-message', function(data) {
       console.log(`Mensaje recibido, reenviando: ${data.message}`);
       socket.broadcast.emit('recibe-message', {
-        username: socket.id,
-        message: data.message
+        sender: socket.id,
+        message: data.message,
+        planId: data.planId
       });
     });
   });

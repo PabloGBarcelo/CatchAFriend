@@ -33,6 +33,7 @@ import { DetailRequestAndEditPlanComponent } from './detail-request-and-edit-pla
 import { MomentModule } from 'angular2-moment/moment.module';
 import * as moment from 'moment';
 import { ChatService } from '../services/chat.service';
+import { MyChatsSelectedComponent } from './my-chats-selected/my-chats-selected.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,6 +51,7 @@ import { ChatService } from '../services/chat.service';
     MyPlansDetailComponent,
     NewPlanComponent,
     DetailRequestAndEditPlanComponent,
+    MyChatsSelectedComponent,
   ],
   imports: [
     BrowserModule,

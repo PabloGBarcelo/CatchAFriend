@@ -16,9 +16,12 @@ export class ChatService {
     this.socket = io.connect(`${BASE_DOMAIN}`);
     this.socket.on('recibe-message', function(data:any){
       console.log(`Mensaje Recibido: "${data.message}"`);
+      // save in Mongo
+
       this.messages.push({
-        user: 'Anonimo',
-        message:data.message
+        sender: data.sender,
+        message:data.message,
+        planId: data.planId
       })
     }.bind(this));
   }
