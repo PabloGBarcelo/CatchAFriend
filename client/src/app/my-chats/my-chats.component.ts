@@ -21,7 +21,6 @@ export class MyChatsComponent implements OnInit {
         this.user = user;
         this.chatService.getChatsOfUser(user._id).subscribe(
           (chats) => {
-            console.log(chats);
             this.chatsUser = chats;
           },
           (error) =>{
@@ -31,5 +30,4 @@ export class MyChatsComponent implements OnInit {
       }, (err) => { console.log(err) });
     // Load values of chat
   }
-
 }

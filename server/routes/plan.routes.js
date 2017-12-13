@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const Plan = require('../models/Plan.model');
 const Routes = express.Router();
+const ChatUser = require('../models/Chat.model');
 const nodemailer = require('nodemailer');
 // var upload = multer({
 //   dest: 'public/images/uploads/'
@@ -321,7 +322,8 @@ Routes.post('/plan/:planId/like/:userId', (req, res, next) => { // CHECKED
             .populate("_owner")
             .then(result => {
               console.log(result);
-              sendEmail(result._owner[0].email);
+              // Send email to user
+              sendEmail(result._owner[0].email,'You have a new request in CatchAFriend ✔!');
             })
             .catch(e => console.log(e));
         res.status(200).json("Plan Liked");
@@ -414,6 +416,37 @@ Routes.post('/plan/:planId/accept/:userId', (req, res, next) => { // CHECKED
         });
       else {
         // SEND NODEMAIL HERE
+
+        // Insert new ChatUser of owner and
+        ChatUser.find({ planId:req.params.planId,
+                        userId:result._owner._id})
+                .then(result =>{
+                  // if not exist, insert in bbdd own chat
+                  if (!result){
+                    let newChatUser = new ChatUser({
+                      planId:req.params.planId,
+                      userId:result._owner._id,
+                      status:"in"
+                    });
+                      newChatUser.save();
+                  }
+                });
+        // Insert accepted user new ChatUser to plan
+        let newChatUser = new ChatUser({
+          planId:req.params.planId,
+          userId:req.params.userId,
+          status:"in"
+        });
+          newChatUser.save();
+
+        //Search email and send
+        User.findById(req.params.userId)
+            .then(result => {
+              console.log(result);
+              // Send email to user
+              sendEmail(result.email,'You have a new plan accepted in CatchAFriend ✔!');
+            })
+            .catch(e => console.log(e));
         res.status(200).json("Plan Accepted");
       }
     })
@@ -432,7 +465,7 @@ Routes.post('/uploadPhoto', parser.single('image'), (req, res, next) => {
   console.log(req.file);
 });
 
-sendEmail = function(userEmail) {
+sendEmail = function(userEmail,subject) {
   console.log(userEmail);
   if (typeof(userEmail) != "undefined") {
     console.log('Hello!');
@@ -453,7 +486,7 @@ sendEmail = function(userEmail) {
       let mailOptions = {
         from: '"CatchAFriend 👻" <team@catchafriend.com>', // sender address
         to: userEmail, // list of receivers
-        subject: 'You have a new request in CatchAFriend ✔!', // Subject line
+        subject: subject, // Subject line
         text: 'Congratulations! you have friends waiting for you!!', // plain text body
         html: '<b>Congrats! You have friends waiting for you!!!, click here: <a href="http://localhost:4200/myplans">Go to my plans</a></b>' // html body
       };

@@ -21,5 +21,10 @@ export class DetailRequestAndEditPlanComponent implements OnInit {
       );
     });
   }
-
+  accept(desision){
+    console.log(decision);
+  }
+  deny(decision){
+    console.log(decision);
+  }
 }

@@ -55,8 +55,8 @@ export class ChatService {
                     .map(chats => chats.json())
                     .catch(this.handleError);
   }
-  getMessagesOfPlanIdChat(idPlan){
-    return this.http.post(`${BASE_URL}/getMessages`,idPlan,this.options)
+  getMessagesOfPlanIdChat(planId){
+    return this.http.post(`${BASE_URL}/getMessages`,{planId},this.options)
                     .map(messages => messages.json())
                     .catch(this.handleError);
   }

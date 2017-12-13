@@ -20,6 +20,10 @@ export class MyChatsSelectedComponent implements OnInit {
     // get id plan
     this.route.params.subscribe(params => {
       this.planId = params['id'];
+      this.chat.getMessagesOfPlanIdChat(params['id']).subscribe(
+        chats => {console.log(chats);this.allHistory=chats},
+        error => console.log(error)
+      );
     });
     this.auth.isLoggedIn().subscribe(
       (user) => {

@@ -1,11 +1,10 @@
 <div *ngIf="this.user">
   <ul>
-    <div *ngFor="let history of allHistory">
-      <div *ngIf=""> <!-- user -->
-        <b>{{m.user}}</b>: {{m.message}} {{ m.planId }}
-      </div>
-      <div *ngIf=""> <!-- other user -->
-        <b>{{m.user}}</b>: {{m.message}} {{ m.planId }}
+    <div *ngIf="allHistory">
+      <div *ngFor="let history of allHistory">
+        <div class="user"> <!-- user -->
+          <b>{{history.senderId.nickname}}</b>: {{history.message}}
+        </div>
       </div>
     </div>
     <li *ngFor="let m of chat.messages">

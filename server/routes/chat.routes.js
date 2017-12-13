@@ -53,7 +53,7 @@ Routes.post('/addMessage', (req, res, next) => { // CHECKED
   let message = req.body.data.message;
   let planId = req.body.data.planId;
     console.log("PASANDO");
-    console.log(senderId,message,planId)
+    console.log(senderId,message,planId);
   if (!senderId || !message || !planId) {
     console.log("FAIL");
     res.status(400).json({
@@ -83,10 +83,10 @@ Routes.post('/addMessage', (req, res, next) => { // CHECKED
 
 Routes.post('/getMessages', (req, res, next) => {
   // get all chats of planId
-
   Chat.find({
       planId: req.body.planId
     })
+    .populate('senderId')
     .then(data => {
       res.status(200).json(data);
     })
@@ -102,7 +102,7 @@ Routes.post('/getChats', (req, res, next) => {
   // get all chats of user
   console.log("chats");
   ChatUser.find({
-      userId: req.body.idUser
+      userId: req.body.idUser, status:"in"
     })
     .populate('planId')
     .exec()
