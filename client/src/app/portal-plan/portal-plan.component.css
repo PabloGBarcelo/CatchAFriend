@@ -1,0 +1,15 @@
+.logoHeader{
+  margin: 0 auto;
+  text-align: center;
+  padding: 10px;
+}
+
+.iconCalendar > img {
+    width: 35px;
+}
+
+.iconCalendar {
+    display: inline-block;
+    width: 12%;
+    padding: 4px;
+}

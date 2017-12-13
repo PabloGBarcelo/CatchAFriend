@@ -1,3 +1,6 @@
+<div class="logoHeader">
+  <img src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513114677/logoHeader_fwizao.png">
+</div>
 <div>
   <div *ngIf="this.plans[this.x]">
     <div class="thing-to-move" (panstart)="onPanStart($event)" (panmove)="onPan($event)" (panEnd)="onPanEnd($event)">
@@ -7,8 +10,8 @@
         </div>
       </div>
       <div class="dataHeader">
-        <div class="owner">
-          <img width="50px" [src]="this.plans[this.x]._owner[0].photoUrl"> {{ this.plans[this.x]._owner[0].nickname }}
+        <div class="iconCalendar">
+          <img src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513201661/calendar-512_uztorn.png">
         </div>
         <div class="dataDate">
           {{ this.plans[this.x].datePlan }}
@@ -19,6 +22,9 @@
       </div>
       <div class="title">
         {{ this.plans[this.x].title }}
+      </div>
+      <div class="owner">
+        <img width="50px" [src]="this.plans[this.x]._owner[0].photoUrl"> {{ this.plans[this.x]._owner[0].nickname }}
       </div>
       <div class="description">
         {{ this.plans[this.x].description }}

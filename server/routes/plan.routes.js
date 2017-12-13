@@ -2,7 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const Plan = require('../models/Plan.model');
 const Routes = express.Router();
-const ChatUser = require('../models/Chat.model');
+const ChatUser = require('../models/ChatUser.model');
+const User = require('../models/User.model');
 const nodemailer = require('nodemailer');
 // var upload = multer({
 //   dest: 'public/images/uploads/'
@@ -396,6 +397,7 @@ Routes.post('/plan/:planId/cancel/:userId', (req, res, next) => {
       message: 'Error Rejecting plan'
     }));
 });
+
 // When a user accept a plan
 Routes.post('/plan/:planId/accept/:userId', (req, res, next) => { // CHECKED
   Plan.findOneAndUpdate({
@@ -416,29 +418,37 @@ Routes.post('/plan/:planId/accept/:userId', (req, res, next) => { // CHECKED
         });
       else {
         // SEND NODEMAIL HERE
-
+        console.log("Hasta aqui!");
+        console.log(req.params.planId,req.body.owner[0]._id);
         // Insert new ChatUser of owner and
-        ChatUser.find({ planId:req.params.planId,
-                        userId:result._owner._id})
+        ChatUser.find({"planId":req.params.planId,"userId":req.body.owner[0]._id})
                 .then(result =>{
+                  console.log("RESULTADO VALE");
+                  console.log(result);
                   // if not exist, insert in bbdd own chat
-                  if (!result){
+                  if (result.length === 0){
+                    console.log("Primera vez");
                     let newChatUser = new ChatUser({
                       planId:req.params.planId,
-                      userId:result._owner._id,
+                      userId:req.body.owner[0]._id,
                       status:"in"
                     });
+                    console.log("newChatUser");
+                    console.log(newChatUser);
                       newChatUser.save();
                   }
-                });
+                  let newChatUser2 = new ChatUser({
+                    planId:req.params.planId,
+                    userId:req.params.userId,
+                    status:"in"
+                  });
+                    console.log("newChatUser2");
+                    console.log(newChatUser2);
+                    newChatUser2.save();
+                    console.log("Segunda creada");
+                }).catch(err => console.log(err));
         // Insert accepted user new ChatUser to plan
-        let newChatUser = new ChatUser({
-          planId:req.params.planId,
-          userId:req.params.userId,
-          status:"in"
-        });
-          newChatUser.save();
-
+        console.log("LLEGUE AQUI");
         //Search email and send
         User.findById(req.params.userId)
             .then(result => {
@@ -450,9 +460,10 @@ Routes.post('/plan/:planId/accept/:userId', (req, res, next) => { // CHECKED
         res.status(200).json("Plan Accepted");
       }
     })
-    .catch(err => res.status(500).json({
+    .catch(err => {console.log(err);res.status(500).json({
       message: 'Error Accepting plan'
-    }));
+    });}
+  );
 
 });
 

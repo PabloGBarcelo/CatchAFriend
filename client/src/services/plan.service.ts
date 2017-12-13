@@ -59,6 +59,11 @@ export class PlanService {
                     .map(res => res.json())
                     .catch(this.handleError);
   }
+  acceptPlan(userId,planId,owner){
+    return this.http.post(`${BASE_URL}/plan/${planId}/accept/${userId}`,{owner},this.options)
+                    .map(res => res.json())
+                    .catch(this.handleError);
+  }
 
   handleError(e) {
     return Observable.throw(e.json().message);

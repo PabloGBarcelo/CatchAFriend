@@ -21,10 +21,17 @@ export class DetailRequestAndEditPlanComponent implements OnInit {
       );
     });
   }
-  accept(desision){
-    console.log(decision);
+  agree(m){
+    // this.myPlan, m => userId
+    this.plan.acceptPlan(m,this.myPlan['_id'],this.myPlan['_owner']).subscribe(
+    accepted => console.log(accepted),
+    error => console.log(error)
+  );
   }
-  deny(decision){
-    console.log(decision);
+  deny(m){
+    this.plan.cancelPlan(m,this.myPlan['_id']).subscribe(
+      deny => console.log(deny),
+      error => console.log(error)
+    )
   }
 }

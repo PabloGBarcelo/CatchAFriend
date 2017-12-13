@@ -6,8 +6,7 @@
     {{ myPlan.datePlan }}
   </div>
   <div class="numberPeople">
-    {{ myPlan.maxPeople - myPlan._acceptRequest.length}}
-    ({{ myPlan.maxPeople}}) img persona
+    {{ myPlan.maxPeople - myPlan._acceptRequest.length}} ({{ myPlan.maxPeople}}) img persona
   </div>
   <div class="title">
     {{ myPlan.title }}
@@ -32,26 +31,25 @@
 
   <div *ngFor="let request of myPlan._usersRequest">
     {{ request.name }}
-    <button (click)="accept(request._id)">Accept</button>
+    <button (click)="agree(request._id)">Agree</button>
     <button (click)="deny(request._id)">Deny</button>
-
-</div>
-<a [routerLink]="['/myplans']">Go back</a>
-<ul>
-  <li><a [routerLink]="['/portal']">Plans</a></li>
-  <li class="selected">My Plans</li>
-  <li><a [routerLink]="['/mychats']">My Chats</a></li>
-  <li><a [routerLink]="['/lasthour']">Last Hour</a></li>
-  <li><a [routerLink]="['/settings']">Settings</a></li>
-</ul>
-
-<div id="footer">
-  <div class="col-xs-12 navbar-inverse navbar-fixed-bottom">
-  <div class="row" id="bottomNav">
-    <div class="col-xs-3 text-center"><a href="#"><i class="glyphicon glyphicon-circle-arrow-left"></i><br>Link</a></div>
-    <div class="col-xs-3 text-center"><a href="#"><i class="glyphicon glyphicon-circle-arrow-down"></i><br>Link</a></div>
-    <div class="col-xs-3 text-center"><a href="#"><i class="glyphicon glyphicon-circle-arrow-right"></i><br>Link</a></div>
-    <div class="col-xs-3 text-center"><a href="#"><i class="glyphicon glyphicon-circle-arrow-right"></i><br>Link</a></div>
   </div>
+  <a [routerLink]="['/myplans']">Go back</a>
+  <ul>
+    <li><a [routerLink]="['/portal']">Plans</a></li>
+    <li class="selected">My Plans</li>
+    <li><a [routerLink]="['/mychats']">My Chats</a></li>
+    <li><a [routerLink]="['/lasthour']">Last Hour</a></li>
+    <li><a [routerLink]="['/settings']">Settings</a></li>
+  </ul>
+
+  <div id="footer">
+    <div class="col-xs-12 navbar-inverse navbar-fixed-bottom">
+      <div class="row" id="bottomNav">
+        <div class="col-xs-3 text-center"><a href="#"><i class="glyphicon glyphicon-circle-arrow-left"></i><br>Link</a></div>
+        <div class="col-xs-3 text-center"><a href="#"><i class="glyphicon glyphicon-circle-arrow-down"></i><br>Link</a></div>
+        <div class="col-xs-3 text-center"><a href="#"><i class="glyphicon glyphicon-circle-arrow-right"></i><br>Link</a></div>
+        <div class="col-xs-3 text-center"><a href="#"><i class="glyphicon glyphicon-circle-arrow-right"></i><br>Link</a></div>
+      </div>
+    </div>
   </div>
-</div>
