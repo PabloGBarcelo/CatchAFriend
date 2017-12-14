@@ -1,11 +1,19 @@
+<div class="logoHeader">
+  <img src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513114677/logoHeader_fwizao.png">
+</div>
 <div *ngIf="this.user">
-  <div *ngFor="let chats of chatsUser">
+  <div class="conversation" *ngFor="let chats of chatsUser">
     <a [routerLink] = "['/mychats',chats.planId._id]">
-    <div class="plan">
-      {{ chats.planId.title}}
+    <div class="image">
+      <img class="photo" src="{{ chats.planId.photo[0]}}">
     </div>
-    <div class="date">
-      {{ chats.planId.datePlan }}
+    <div class="titleAndLastMessage">
+      <div class="plan">
+        {{ chats.planId.title}}
+      </div>
+      <div class="date">
+        Last message: | truncate : 3
+      </div>
     </div>
   </a>
   </div>

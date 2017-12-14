@@ -1,45 +1,82 @@
-<div *ngIf="myPlan">
-  <div class="photoPlan">
-    <img width="300px" [src]="myPlan.photo[0]">
-  </div>
-  <div class="owner">
-    <img width="50px" [src]="myPlan._owner[0].photoUrl">
-    {{ myPlan._owner[0].nickname }}
-  </div>
-  <div class="dataDate">
-    {{ myPlan.datePlan }}
-  </div>
-  <div class="numberPeople">
-    {{ myPlan.maxPeople - myPlan._acceptRequest.length}}
-    ({{ myPlan.maxPeople}}) img persona
-  </div>
-  <div class="title">
-    {{ myPlan.title }}
-  </div>
-  <div class="description">
-    {{ myPlan.description }}
-  </div>
-  <div class="positionText">
-    {{ myPlan.position.name }}
-  </div>
-  <div class="transportPrice">
-    <div class="transport">
-      {{myPlan.transport}}
-    </div>
-    <div class="price" *ngIf="myPlan.money == 0">
-      FREE
-    </div>
-    <div class="price" *ngIf="myPlan.money > 0">
-      {{myPlan.price}}
-    </div>
+<div class="logoHeader">
+  <img src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513114677/logoHeader_fwizao.png">
+</div>
+<div>
+  <div *ngIf="myPlan">
+        <div class="photoPlan">
+          <img class="photoPlanEvent" width="300px" [src]="myPlan.photo[0]">
+        </div>
+      <div class="dataHeader">
+        <div class="iconCalendar">
+          <img src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513201661/calendar-512_uztorn.png">
+        </div>
+        <div class="dataDate">
+          <div class="years">{{ myPlan.datePlan | amDateFormat: 'DD-MM-YYYY HH:mm'}}</div>
+        </div>
+        <div class="numberPeople">
+          <img class="iconPeople" src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513202533/iconPerson_sznapu.png"> {{ myPlan.maxPeople - myPlan._acceptRequest.length}} / {{ myPlan.maxPeople}}
+        </div>
+      </div>
+      <div class="title">
+        {{ myPlan.title }}
+      </div>
+      <div class="infoAllPlan">
+        <div class="owner">
+          <div class="iconPosition">
+            <img width="50px" [src]="myPlan._owner[0].photoUrl">
+          </div>
+          <div class="infoUser">
+            <div class="nickname">{{ myPlan._owner[0].nickname }}</div>
+            <div class="years">{{ myPlan._owner[0].birthday | amAdd: 1 : 'years' | timeAgo }}</div>
+          </div>
+        </div>
+        <div class="imageGeo">
+          <img class="geolocationIcon" src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513204252/iconPlace_uhmhqu.png">
+        </div>
+        <div class="street">
+          <div class="descStreet">
+            {{ myPlan.street }}
+          </div>
+        </div>
+        <div class="description">
+          {{ myPlan.description }}
+        </div>
+        <div class="positionText">
+          {{ myPlan.position.name }}
+        </div>
+      </div>
+
+    <div id="footer">
+      <div class="col-xs-12 navbar-inverse navbar-fixed-bottom third">
+        <div class="col-xs-6 Place">
+          <div class="car">
+            <img src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513213921/car_qhtdqb.png">
+          </div>
+          <div class="transport">
+            {{myPlan.transport}}
+          </div>
+        </div>
+        <div class="col-xs-6 Money">
+          <div class="iconMoney">
+            <img class="money" src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513214778/money_ctuead.png">
+          </div>
+          <div class="price" *ngIf="myPlan.money == 0">
+            FREE
+          </div>
+          <div class="price" *ngIf="myPlan.money > 0">
+            {{myPlan.money}} €
+          </div>
+        </div>
+        <div class="row" id="bottomNav">
+        </div>
+      </div>
   </div>
 </div>
-<a [routerLink]="['/myplans']">Go back</a>
 <div id="footer">
   <div class="col-xs-12 navbar-inverse navbar-fixed-bottom">
     <div class="row" id="bottomNav">
       <div class="col-xs-3 text-center"><a [routerLink]="['/portal']"><i class="fa fa-id-badge unselected" aria-hidden="true"></i></a><br></div>
-      <div class="col-xs-3 text-center selected"><i class="fa fa-list selected" aria-hidden="true"></i><br>My Plans</div>
+      <div class="col-xs-3 text-center selected"><a [routerLink]="['/myplans']"><i class="fa fa-list selected" aria-hidden="true"></i><br></a>Back</div>
       <div class="col-xs-3 text-center"><a [routerLink]="['/mychats']"><i class="fa fa-comments-o unselected" aria-hidden="true"></i></a><br></div>
       <div class="col-xs-3 text-center"><a [routerLink]="['/settings']"><i class="fa fa-user-circle unselected" aria-hidden="true"></i></a><br></div>
     </div>

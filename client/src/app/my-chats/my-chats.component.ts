@@ -20,12 +20,11 @@ export class MyChatsComponent implements OnInit {
       (user) => {
         this.user = user;
         this.chatService.getChatsOfUser(user._id).subscribe(
-          (chats) => {
-            this.chatsUser = chats;
-          },
-          (error) =>{
+          (chats) =>
+            this.chatsUser = chats,
+          (error) =>
             console.log(error)
-          });
+          );
         // Here load data of chat
       }, (err) => { console.log(err) });
     // Load values of chat

@@ -16,3 +16,39 @@
     font-weight: 300;
     margin-bottom: 3px;
 }
+
+.logoHeader{
+  margin: 0 auto;
+  text-align: center;
+  padding: 10px;
+}
+
+.image {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-left: 14px;
+    display: inline-block;
+}
+
+.photo {
+    display: inline;
+    margin: 0 auto;
+    height: 100%;
+    width: auto;
+}
+
+.titleAndLastMessage{
+    width: 70%;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 4px;
+    margin-left: 15px;
+}
+
+.conversation {
+  border-bottom: 1px solid gainsboro;
+  padding: 9px;
+}

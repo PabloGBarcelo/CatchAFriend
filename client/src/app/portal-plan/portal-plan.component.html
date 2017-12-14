@@ -1,12 +1,15 @@
 <div class="logoHeader">
   <img src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513114677/logoHeader_fwizao.png">
+  <div class="addPlan">
+    <a [routerLink]="['/createplan']"><img class="imageAddTop" src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513263694/plus_mytead.png"></a>
+  </div>
 </div>
 <div>
   <div *ngIf="this.plans[this.x]">
     <div class="thing-to-move" (panstart)="onPanStart($event)" (panmove)="onPan($event)" (panEnd)="onPanEnd($event)">
       <div [style.marginLeft.px]="placeX">
         <div class="photoPlan">
-          <img width="300px" [src]="this.plans[this.x].photo[0]">
+          <img class="photoPlanEvent" width="300px" [src]="this.plans[this.x].photo[0]">
         </div>
       </div>
       <div class="dataHeader">
@@ -17,35 +20,36 @@
           <div class="years">{{ this.plans[this.x].datePlan | amDateFormat: 'DD-MM-YYYY HH:mm'}}</div>
         </div>
         <div class="numberPeople">
-          <img class="iconPeople" src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513202533/iconPerson_sznapu.png">
-          {{ this.plans[this.x].maxPeople - this.plans[this.x]._acceptRequest.length}} / {{ this.plans[this.x].maxPeople}}
+          <img class="iconPeople" src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513202533/iconPerson_sznapu.png"> {{ this.plans[this.x].maxPeople - this.plans[this.x]._acceptRequest.length}} / {{ this.plans[this.x].maxPeople}}
         </div>
       </div>
       <div class="title">
         {{ this.plans[this.x].title }}
       </div>
-      <div class="owner">
-        <div class="iconPosition">
-          <img width="50px" [src]="this.plans[this.x]._owner[0].photoUrl">
+      <div class="infoAllPlan">
+        <div class="owner">
+          <div class="iconPosition">
+            <img width="50px" [src]="this.plans[this.x]._owner[0].photoUrl">
+          </div>
+          <div class="infoUser">
+            <div class="nickname">{{ this.plans[this.x]._owner[0].nickname }}</div>
+            <div class="years">{{ this.plans[this.x]._owner[0].birthday | amAdd: 1 : 'years' | timeAgo }}</div>
+          </div>
         </div>
-        <div class="infoUser">
-          <div class="nickname">{{ this.plans[this.x]._owner[0].nickname }}</div>
-          <div class="years">{{ this.plans[this.x]._owner[0].birthday | amAdd: 1 : 'years' | timeAgo }}</div>
+        <div class="imageGeo">
+          <img class="geolocationIcon" src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513204252/iconPlace_uhmhqu.png">
         </div>
-      </div>
-      <div class="imageGeo">
-        <img class="geolocationIcon" src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513204252/iconPlace_uhmhqu.png">
-      </div>
-      <div class="street">
-        <div class="descStreet">
-          {{ this.plans[this.x].street }}
+        <div class="street">
+          <div class="descStreet">
+            {{ this.plans[this.x].street }}
+          </div>
         </div>
-      </div>
-      <div class="description">
-        {{ this.plans[this.x].description }}
-      </div>
-      <div class="positionText">
-        {{ this.plans[this.x].position.name }}
+        <div class="description">
+          {{ this.plans[this.x].description }}
+        </div>
+        <div class="positionText">
+          {{ this.plans[this.x].position.name }}
+        </div>
       </div>
     </div>
     <div id="footer">
@@ -77,10 +81,9 @@
   <div id="footer">
     <div class="col-xs-12 navbar-inverse navbar-fixed-bottom secondary">
       <div class="row" id="bottomNav">
-
         <div *ngIf="this.plans.length == 0 && this.noPlans">
           <div class="noPlans">
-            SORRY, THERE IS NO PLANS NOW<br>
+            SORRY, THERE ARE NO PLANS NOW<br>
           </div>
           <div class="imageEmpty">
             <img class="emptysad" src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513212777/noPlans_seb4kn.png">

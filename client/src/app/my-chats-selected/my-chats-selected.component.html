@@ -1,17 +1,27 @@
 <div class="logoHeader">
   <img src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513114677/logoHeader_fwizao.png">
 </div>
-<div *ngIf="this.user">
+<div *ngIf="user && allHistory && infoPlan">
+<div class="headerChat">
+  {{ infoPlan.title }}
+</div>
+<div class="owner">
+  Plan by {{  infoPlan._owner[0].nickname }}
+</div>
   <ul>
     <div *ngIf="allHistory">
       <div *ngFor="let history of allHistory">
-        <div class="user"> <!-- user -->
+        <!-- user -->
+        <li class="him" *ngIf="history.senderId._id  != user._id">
           <b>{{history.senderId.nickname}}</b>: {{history.message}}
+        </li>
+        <li class="me" *ngIf="history.senderId._id  == user._id">
+          <b>Me</b>: {{history.message}}
+        </li>
         </div>
-      </div>
     </div>
     <div *ngFor="let m of chat.messages">
-      <li *ngIf="m.planId == planId">
+      <li class="me" *ngIf="m.planId == planId">
         <b>{{m.userId}}</b>: {{m.message}}
       </li>
     </div>
@@ -32,7 +42,7 @@
     <div class="row" id="bottomNav">
       <div class="col-xs-3 text-center"><a [routerLink]="['/portal']"><i class="fa fa-id-badge unselected" aria-hidden="true"></i></a><br></div>
       <div class="col-xs-3 text-center"><a [routerLink]="['/myplans']"><i class="fa fa-list unselected" aria-hidden="true"></i></a><br></div>
-      <div class="col-xs-3 text-center selected"><i class="fa fa-comments-o selected" aria-hidden="true"></i><br>My Chats</div>
+      <div class="col-xs-3 text-center selected"><a [routerLink]="['/mychats']"><i class="fa fa-comments-o selected" aria-hidden="true"></i></a><br>Back</div>
       <div class="col-xs-3 text-center"><a [routerLink]="['/settings']"><i class="fa fa-user-circle unselected" aria-hidden="true"></i></a><br></div>
     </div>
   </div>

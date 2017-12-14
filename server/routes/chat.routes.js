@@ -116,6 +116,26 @@ Routes.post('/getChats', (req, res, next) => {
       });
     });
 });
+
+Routes.post('/getLastMessage', (req, res, next) => {
+  // get all chats of user
+  console.log("chats");
+  ChatUser.findOne({
+      userId: req.body.planId
+    },{},{ sort:{ 'created_at':-1 }})
+    .populate('planId')
+    .exec()
+    .then(data => {
+      res.status(200).json(data);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        message: 'Error getting chat'
+      });
+    });
+});
+
 module.exports = Routes;
 
 // idEmitUser: { type:Schema.Types.ObjectId, required:true },

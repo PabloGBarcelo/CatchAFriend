@@ -43,9 +43,6 @@ export class PortalPlanComponent implements OnInit {
     this.auth.isLoggedIn().subscribe(
       (user) => {
         this.idUser = user['_id'];
-        // this.years = user['birthday'] - Date.now();
-        // this.years = moment.duration(user['birthday'].diff(Date.now()));
-        // console.log("YEARS "+ this.years); // 8 years
         this.body['rush'] = this.rush // Boolean
         this.body['likingUser'] = user['_liking'];
         this.body['userId'] = user['_id'];

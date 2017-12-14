@@ -161,10 +161,12 @@
 .photoPlan {
     max-height: 170px;
     overflow: hidden;
+    text-align: center;
 }
 
 .photoPlan > img {
     text-align: center;
+    width: 375px;
 }
 
 .car {
@@ -175,6 +177,7 @@
 .Place {
     margin: 0;
     padding: 0;
+    text-align: right;
 }
 
 .transport {
@@ -192,4 +195,22 @@
     width: 80px;
     text-align: left;
     margin-left: 10px;
+}
+
+.infoAllPlan {
+    padding: 10px;
+}
+.addPlan {
+    display: inline-block;
+    float: right;
+  }
+
+.addPlan > img{
+  width: 27px;
+}
+
+.imageAddTop {
+    position: absolute;
+    right: 13px;
+    width: 30px;
 }

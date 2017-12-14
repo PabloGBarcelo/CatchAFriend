@@ -34,6 +34,8 @@ import { ChatService } from '../services/chat.service';
 import { MyChatsSelectedComponent } from './my-chats-selected/my-chats-selected.component';
 import { MomentModule } from 'angular2-moment';
 import { TimeAgoPipe } from 'time-ago-pipe';
+import { TruncateModule } from 'ng2-truncate';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,6 +66,7 @@ import { TimeAgoPipe } from 'time-ago-pipe';
     ReactiveFormsModule,
     CalendarModule,
     MomentModule,
+    TruncateModule,
     AgmCoreModule.forRoot({
      apiKey: "AIzaSyCU9On2sVtMW2yuerirL0yGkJ5KqL-A26o",
      libraries: ["places"]

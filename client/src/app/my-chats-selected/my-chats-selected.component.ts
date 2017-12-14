@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChatService } from '../../services/chat.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { PlanService } from '../../services/plan.service';
 
 @Component({
   selector: 'app-my-chats-selected',
@@ -14,7 +15,8 @@ export class MyChatsSelectedComponent implements OnInit {
   user: object;
   planId;
   allHistory;
-  constructor(private chat: ChatService, private router: Router, private route: ActivatedRoute, private auth: AuthService) { }
+  infoPlan:object;
+  constructor(private chat: ChatService, private plan: PlanService,private router: Router, private route: ActivatedRoute, private auth: AuthService) { }
 
   ngOnInit() {
     // get id plan
@@ -24,13 +26,18 @@ export class MyChatsSelectedComponent implements OnInit {
       this.chat.getMessagesOfPlanIdChat(params['id']).subscribe(
         chats => this.allHistory=chats,
         error => console.log(error)
+
       );
+    this.plan.getPlan(params['id']).subscribe(
+      (plan) => this.infoPlan = plan,
+      (error) => console.log(error)
+    );
+
     });
     this.auth.isLoggedIn().subscribe(
-      (user) => {
-        this.user = user;
+      (user) => this.user = user
         // Here load data of chat
-      }, (err) => { console.log(err) });
+      , (err) => { console.log(err) });
     // Load values of chat
   }
   sendMessage(data) {

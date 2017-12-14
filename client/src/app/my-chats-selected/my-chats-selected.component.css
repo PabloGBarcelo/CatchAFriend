@@ -35,3 +35,60 @@
 .boxMes{
   bottom:66px;
 }
+
+ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul li{
+  display: inline-block;
+  clear: both;
+  padding: 3px 12px;
+  border-radius: 39px 0px 0px 20px;
+  margin-bottom: 4px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.him{
+  background: #FFF;
+  float: left;
+  border: 2px solid #F25850;
+  color: #F25850;
+  border-radius: 0 39px 20px 0 !important;
+  border-left: 0;
+}
+
+.me{
+  float: right;
+  background: #F25850;
+  color: #fff;
+}
+
+.him + .me{
+  border-bottom-right-radius: 5px;
+}
+
+.me + .me{
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.me:last-of-type {
+  border-bottom-right-radius: 0px;
+}
+
+.headerChat {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 100;
+    margin-top: 3px;
+}
+
+.owner {
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 11px;
+}
