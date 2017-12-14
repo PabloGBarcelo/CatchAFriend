@@ -1,6 +1,5 @@
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { PortalPlanComponent } from './portal-plan/portal-plan.component';
 import { MyPlansComponent } from './my-plans/my-plans.component';
@@ -9,7 +8,6 @@ import { LastHourComponent } from './last-hour/last-hour.component';
 import { SettingsComponent } from './settings/settings.component';
 import { SignupComponent } from './signup/signup.component';
 import { ExtrasignupComponent } from './extrasignup/extrasignup.component';
-import { SwipeComponent } from './swipe/swipe.component';
 import { MyPlansDetailComponent } from './my-plans-detail/my-plans-detail.component';
 import { NewPlanComponent } from './new-plan/new-plan.component';
 import { DetailRequestAndEditPlanComponent } from './detail-request-and-edit-plan/detail-request-and-edit-plan.component';
@@ -27,7 +25,6 @@ const myRoutes: Routes = [
   { path: 'signup',  component: SignupComponent },
   { path: 'extrasignup',  component: ExtrasignupComponent },
   { path: 'welcome', redirectTo: 'extrasignup', pathMatch: 'full' },
-  { path: 'swipe',  component: SwipeComponent },
   { path: 'createplan',  component: NewPlanComponent },
   { path: 'myplans/editplan/:id',  component: DetailRequestAndEditPlanComponent },
   { path: 'mychats/:id',  component: MyChatsSelectedComponent },
