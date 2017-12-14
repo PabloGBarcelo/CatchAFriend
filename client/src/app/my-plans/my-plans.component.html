@@ -1,54 +1,58 @@
 <div class="logoHeader">
   <img src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513114677/logoHeader_fwizao.png">
-<div class="addNewPlan">
+  <div class="addNewPlan">
 
+  </div>
 </div>
-</div>
-<div class="plan" *ngFor="let plan of userPlans">
-  <a [routerLink]="[plan._id]">
-    <div class="image">
-      <img class="imageMini" [src]="plan.photo[0]">
-    </div>
-    <div class="containerTitleDay">
-      <div class="title">
-        {{ plan.title }}
+<div class="allPlans">
+
+  <div class="plan" *ngFor="let plan of userPlans">
+    <a [routerLink]="[plan._id]">
+      <div class="image">
+        <img class="imageMini" [src]="plan.photo[0]">
       </div>
-      <div class="day">
-        {{ plan.datePlan | amDateFormat: 'DD-MM-YYYY HH:mm'}}
+      <div class="containerTitleDay">
+        <div class="title">
+          {{ plan.title }}
+        </div>
+        <div class="day">
+          {{ plan.datePlan | amDateFormat: 'DD-MM-YYYY HH:mm'}}
+        </div>
       </div>
-    </div>
     </a>
-  <div class="kingdivcontainer" *ngIf="plan._owner == user._id">
-    <div class="kingdiv" *ngIf="plan._usersRequest.length == 0">
-      <img class="king" src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513249123/king_iasrgq.png">
-    </div>
-    <div class="kingdiv" *ngIf="plan._usersRequest.length > 0">
-      <!-- When have new request can check and decide -->
-      <a [routerLink]="['editplan',plan._id]"><img class="king" src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513249383/kingRequest_kwcgjs.png"></a>
-    </div>
-  </div>
-  <div class="takeDecision">
-  <div class="remove" *ngIf="plan._owner != user._id && plan._usersRequest.includes(user._id)">
-    <!-- User waiting can cancel plan-->
-    <div class="cancelPlan">
-      <div class="waiting">
-        <img src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513248618/waiting_w8vtx0.png">
+    <div class="kingdivcontainer" *ngIf="plan._owner == user._id">
+      <div class="kingdiv" *ngIf="plan._usersRequest.length == 0">
+        <img class="king" src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513249123/king_iasrgq.png">
       </div>
-      <div class="removePlan">
-        <button (click)="removePlan([plan._id])">Cancel plan</button>
+      <div class="kingdiv" *ngIf="plan._usersRequest.length > 0">
+        <!-- When have new request can check and decide -->
+        <a [routerLink]="['editplan',plan._id]"><img class="king" src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513249383/kingRequest_kwcgjs.png"></a>
       </div>
-  </div>
-  </div>
-  <div class="accepted" *ngIf="plan._acceptRequest.includes(user._id)">
-    <div class="iconAccepted">
-      <a [routerLink]="['/mychats',plan._id]"><img class="iconA" src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513248359/okTick_n2wyj4.png"></a>
     </div>
-    <div class="textAccepted">
-      Plan Ready!
+    <div class="takeDecision">
+      <div class="remove" *ngIf="plan._owner != user._id && plan._usersRequest.includes(user._id)">
+        <!-- User waiting can cancel plan-->
+        <div class="cancelPlan">
+          <div class="waiting">
+            <img src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513248618/waiting_w8vtx0.png">
+          </div>
+          <div class="removePlan">
+            <button (click)="removePlan([plan._id])">Cancel plan</button>
+          </div>
+        </div>
+      </div>
+      <div class="accepted" *ngIf="plan._acceptRequest.includes(user._id)">
+        <div class="iconAccepted">
+          <a [routerLink]="['/mychats',plan._id]"><img class="iconA" src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513248359/okTick_n2wyj4.png"></a>
+        </div>
+        <div class="textAccepted">
+          Plan Ready!
+        </div>
+      </div>
+      <div class="rejected" *ngIf="plan._rejectedId.includes(user._id)">
+        Not plan, sorry!
+      </div>
     </div>
-  </div>
-  <div class="rejected" *ngIf="plan._rejectedId.includes(user._id)">
-    Not plan, sorry!
   </div>
 </div>
 <div id="footer">

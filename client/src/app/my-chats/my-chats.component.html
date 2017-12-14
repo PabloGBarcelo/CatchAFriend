@@ -1,7 +1,7 @@
 <div class="logoHeader">
   <img src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513114677/logoHeader_fwizao.png">
 </div>
-<div *ngIf="this.user">
+<div class="allChats" *ngIf="this.user">
   <div class="conversation" *ngFor="let chats of chatsUser">
     <a [routerLink] = "['/mychats',chats.planId._id]">
     <div class="image">

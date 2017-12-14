@@ -3,7 +3,10 @@
   text-align: center;
   padding: 10px;
 }
-
+button {
+    background: none;
+    border: none;
+}
 .selectYourLiking{
   margin: 0 auto;
   text-align: center;

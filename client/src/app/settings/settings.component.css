@@ -4,6 +4,11 @@
   padding: 10px;
 }
 
+button {
+    background: none;
+    border: none;
+}
+
 .phototop {
   background: #F25850;
   width: 100%;

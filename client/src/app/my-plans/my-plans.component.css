@@ -4,6 +4,11 @@
   padding: 10px;
 }
 
+button {
+    background: none;
+    border: none;
+}
+
 .navbar-inverse {
   background-color: #fff;
   padding-bottom: 10px;
@@ -81,4 +86,8 @@
     display: inline-block;
     text-align: center;
     margin-left: 22px;
+}
+
+.allPlans {
+    margin-bottom: 84px;
 }
