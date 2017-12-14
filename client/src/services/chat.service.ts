@@ -1,3 +1,4 @@
+import { environment } from '../environments/environment';
 import { Injectable, EventEmitter } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -5,7 +6,7 @@ import 'rxjs/add/operator/catch';
 import { Observable } from 'rxjs/Rx';
 import * as io from 'socket.io-client';
 import { AuthService } from './auth.service';
-const BASE_DOMAIN = 'http://localhost:3000';
+const BASE_DOMAIN = environment.BASE_DOMAIN;
 const BASE_URL = `${BASE_DOMAIN}/api`;
 
 interface Message{
@@ -63,6 +64,11 @@ export class ChatService {
                     .catch(this.handleError);
   }
 
+  getLastMessageOfChat(planId){
+    return this.http.post(`${BASE_URL}/getLastMessage`,{planId},this.options)
+                    .map(messages => messages.json())
+                    .catch(this.handleError);
+  }
   handleError(e) {
     return Observable.throw(e.json().message);
   }

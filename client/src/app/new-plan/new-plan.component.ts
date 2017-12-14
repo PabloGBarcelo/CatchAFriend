@@ -7,7 +7,7 @@ import { PlanService } from '../../services/plan.service';
 import { Router } from '@angular/router';
 import { CategoriesService } from '../../services/categories.service';
 import { AuthService } from '../../services/auth.service';
-
+import { environment } from '../../environments/environment';
 @Component({
   selector: 'app-new-plan',
   templateUrl: './new-plan.component.html',
@@ -121,7 +121,6 @@ export class NewPlanComponent implements OnInit {
 
    onUploadFinished(e){
      // ATTENTION WITH DOUBLE ""
-
      this.photo[e.file.name] = e.serverResponse._body.slice(1,-1);
      if (this.photo[e.file.name] == "some error")
        delete this.photo[e.file.name];

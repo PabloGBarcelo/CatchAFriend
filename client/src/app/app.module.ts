@@ -8,7 +8,6 @@ import { RouterModule } from '@angular/router';
 import { myRoutes } from './routes';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { PortalPlanComponent } from './portal-plan/portal-plan.component';
 import { MyPlansComponent } from './my-plans/my-plans.component';
@@ -19,7 +18,6 @@ import { PlanService } from '../services/plan.service';
 import { SignupComponent } from './signup/signup.component';
 import { ExtrasignupComponent } from './extrasignup/extrasignup.component';
 import { CategoriesService } from '../services/categories.service';
-import { SwipeComponent } from './swipe/swipe.component';
 import { MyPlansDetailComponent } from './my-plans-detail/my-plans-detail.component';
 import { ImageUploadModule } from "angular2-image-upload";
 import { AgmCoreModule } from '@agm/core';
@@ -40,7 +38,6 @@ import { TruncateModule } from 'ng2-truncate';
   declarations: [
     AppComponent,
     LoginComponent,
-    PageNotFoundComponent,
     LandingPageComponent,
     PortalPlanComponent,
     MyPlansComponent,
@@ -49,7 +46,6 @@ import { TruncateModule } from 'ng2-truncate';
     SettingsComponent,
     SignupComponent,
     ExtrasignupComponent,
-    SwipeComponent,
     MyPlansDetailComponent,
     NewPlanComponent,
     DetailRequestAndEditPlanComponent,

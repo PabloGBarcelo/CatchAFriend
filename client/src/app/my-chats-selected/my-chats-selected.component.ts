@@ -26,7 +26,6 @@ export class MyChatsSelectedComponent implements OnInit {
       this.chat.getMessagesOfPlanIdChat(params['id']).subscribe(
         chats => this.allHistory=chats,
         error => console.log(error)
-
       );
     this.plan.getPlan(params['id']).subscribe(
       (plan) => this.infoPlan = plan,
