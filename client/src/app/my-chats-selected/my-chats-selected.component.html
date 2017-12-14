@@ -1,3 +1,6 @@
+<div class="logoHeader">
+  <img src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513114677/logoHeader_fwizao.png">
+</div>
 <div *ngIf="this.user">
   <ul>
     <div *ngIf="allHistory">
@@ -7,19 +10,30 @@
         </div>
       </div>
     </div>
-    <li *ngFor="let m of chat.messages">
-      <div *ngIf="m.planId == planId">
-        <b>{{m.user}}</b>: {{m.message}} {{ m.planId }}
-      </div>
-    </li>
+    <div *ngFor="let m of chat.messages">
+      <li *ngIf="m.planId == planId">
+        <b>{{m.userId}}</b>: {{m.message}}
+      </li>
+    </div>
   </ul>
-  <input type="text" [(ngModel)]="m">
-  <button (click)="sendMessage(m)"> Send Message </button>
+<div id="footer">
+  <div class="col-xs-12 navbar-inverse navbar-fixed-bottom boxMes">
+    <div class="row" id="bottomNav">
+      <div class="boxMessage">
+        <input class="messageClass" type="text" [(ngModel)]="m">
+        <button (click)="sendMessage(m)"> Send </button>
+      </div>
+    </div>
+  </div>
 </div>
-<ul>
-  <li><a [routerLink]="['/portal']">Plans</a></li>
-  <li><a [routerLink]="['/myplans']">My Plans</a></li>
-  <li class="selected">My Chats</li>
-  <li><a [routerLink]="['/lasthour']">Last Hour</a></li>
-  <li><a [routerLink]="['/settings']">Settings</a></li>
-</ul>
+</div>
+<div id="footer">
+  <div class="col-xs-12 navbar-inverse navbar-fixed-bottom">
+    <div class="row" id="bottomNav">
+      <div class="col-xs-3 text-center"><a [routerLink]="['/portal']"><i class="fa fa-id-badge unselected" aria-hidden="true"></i></a><br></div>
+      <div class="col-xs-3 text-center"><a [routerLink]="['/myplans']"><i class="fa fa-list unselected" aria-hidden="true"></i></a><br></div>
+      <div class="col-xs-3 text-center selected"><i class="fa fa-comments-o selected" aria-hidden="true"></i><br>My Chats</div>
+      <div class="col-xs-3 text-center"><a [routerLink]="['/settings']"><i class="fa fa-user-circle unselected" aria-hidden="true"></i></a><br></div>
+    </div>
+  </div>
+</div>

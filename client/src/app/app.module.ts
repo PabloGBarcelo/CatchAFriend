@@ -30,11 +30,10 @@ import 'hammer-timejs';
 import { NewPlanComponent } from './new-plan/new-plan.component';
 import {CalendarModule} from 'primeng/primeng';
 import { DetailRequestAndEditPlanComponent } from './detail-request-and-edit-plan/detail-request-and-edit-plan.component';
-import { MomentModule } from 'angular2-moment/moment.module';
-import * as moment from 'moment';
 import { ChatService } from '../services/chat.service';
 import { MyChatsSelectedComponent } from './my-chats-selected/my-chats-selected.component';
-
+import { MomentModule } from 'angular2-moment';
+import { TimeAgoPipe } from 'time-ago-pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,6 +52,7 @@ import { MyChatsSelectedComponent } from './my-chats-selected/my-chats-selected.
     NewPlanComponent,
     DetailRequestAndEditPlanComponent,
     MyChatsSelectedComponent,
+    TimeAgoPipe,
   ],
   imports: [
     BrowserModule,

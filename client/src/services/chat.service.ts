@@ -28,27 +28,29 @@ export class ChatService {
       console.log(data);
       console.log(`Mensaje Recibido: "${data.message}"`);
       // save in Mongo when receive message
-      this.http.post(`${BASE_URL}/addMessage`,{data},this.options).subscribe(
-          (msg) => {
-            console.log(msg);
             this.messages.push({
             sender: data.sender,
             message:data.message,
             planId: data.planId
           })
-        },
-          (err) => {
-            console.log(err)
-          }
-        )
+
     }.bind(this));
   }
 
-  sendMessage(m){
-    console.log(`Mandando mensaje: "${m}"`);
-    console.log(m);
-    this.socket.emit('send-message',m);
-    this.messages.push(m)
+  sendMessage(data){
+    console.log(`Mandando mensaje: "${data}"`);
+    console.log(data);
+    this.socket.emit('send-message',data);
+    this.http.post(`${BASE_URL}/addMessage`,{data},this.options).subscribe(
+        (msg) => {
+          console.log("DENTRO")
+          console.log(msg);
+    this.messages.push(data)
+      },
+    (err) => {
+      console.log(err)
+    }
+  )
   }
   getChatsOfUser(idUser){
     return this.http.post(`${BASE_URL}/getChats`,{idUser},this.options)

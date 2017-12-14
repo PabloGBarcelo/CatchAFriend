@@ -14,17 +14,32 @@
           <img src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513201661/calendar-512_uztorn.png">
         </div>
         <div class="dataDate">
-          {{ this.plans[this.x].datePlan }}
+          <div class="years">{{ this.plans[this.x].datePlan | amDateFormat: 'DD-MM-YYYY HH:mm'}}</div>
         </div>
         <div class="numberPeople">
-          {{ this.plans[this.x].maxPeople - this.plans[this.x]._acceptRequest.length}} ({{ this.plans[this.x].maxPeople}}) img persona
+          <img class="iconPeople" src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513202533/iconPerson_sznapu.png">
+          {{ this.plans[this.x].maxPeople - this.plans[this.x]._acceptRequest.length}} / {{ this.plans[this.x].maxPeople}}
         </div>
       </div>
       <div class="title">
         {{ this.plans[this.x].title }}
       </div>
       <div class="owner">
-        <img width="50px" [src]="this.plans[this.x]._owner[0].photoUrl"> {{ this.plans[this.x]._owner[0].nickname }}
+        <div class="iconPosition">
+          <img width="50px" [src]="this.plans[this.x]._owner[0].photoUrl">
+        </div>
+        <div class="infoUser">
+          <div class="nickname">{{ this.plans[this.x]._owner[0].nickname }}</div>
+          <div class="years">{{ this.plans[this.x]._owner[0].birthday | amAdd: 1 : 'years' | timeAgo }}</div>
+        </div>
+      </div>
+      <div class="imageGeo">
+        <img class="geolocationIcon" src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513204252/iconPlace_uhmhqu.png">
+      </div>
+      <div class="street">
+        <div class="descStreet">
+          {{ this.plans[this.x].street }}
+        </div>
       </div>
       <div class="description">
         {{ this.plans[this.x].description }}
@@ -32,42 +47,79 @@
       <div class="positionText">
         {{ this.plans[this.x].position.name }}
       </div>
-      <div class="transportPrice">
-        <div class="transport">
-          {{this.plans[this.x].transport}}
+    </div>
+    <div id="footer">
+      <div class="col-xs-12 navbar-inverse navbar-fixed-bottom third">
+        <div class="col-xs-6 Place">
+          <div class="car">
+            <img src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513213921/car_qhtdqb.png">
+          </div>
+          <div class="transport">
+            {{this.plans[this.x].transport}}
+          </div>
         </div>
-        <div class="price" *ngIf="this.plans[this.x].money == 0">
-          FREE
+        <div class="col-xs-6 Money">
+          <div class="iconMoney">
+            <img class="money" src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513214778/money_ctuead.png">
+          </div>
+          <div class="price" *ngIf="this.plans[this.x].money == 0">
+            FREE
+          </div>
+          <div class="price" *ngIf="this.plans[this.x].money > 0">
+            {{this.plans[this.x].money}} €
+          </div>
         </div>
-        <div class="price" *ngIf="this.plans[this.x].money > 0">
-          {{this.plans[this.x].money}}
+        <div class="row" id="bottomNav">
         </div>
       </div>
     </div>
   </div>
-  <p>FILTER</p>
-  <ul>
-    <li>
-      <div *ngIf="this.typeSearch == 'Confort'">Confort Zone</div>
-      <div *ngIf="this.typeSearch != 'Confort'"><button (click)="setConfort()">Confort Zone</button></div>
-    </li>
+  <div id="footer">
+    <div class="col-xs-12 navbar-inverse navbar-fixed-bottom secondary">
+      <div class="row" id="bottomNav">
 
-    <li>
-      <div *ngIf="this.typeSearch == 'Explore'"> Explore </div>
-      <div *ngIf="this.typeSearch != 'Explore'"><button (click)="setExplore()">Explore</button></div>
-    </li>
-    <li>
-      <div *ngIf="this.typeSearch == 'Random'"> Random</div>
-      <div *ngIf="this.typeSearch != 'Random'"><button (click)="setRandom()">Random</button></div>
-    </li>
-    <li>
-      <input type="checkbox" name="rush" (change)="setRush($event)" S>
-    </li>
-  </ul>
-  <ul>
-    <li class="selected">Plans</li>
-    <li><a [routerLink]="['/myplans']">My Plans</a></li>
-    <li><a [routerLink]="['/mychats']">My Chats</a></li>
-    <li><a [routerLink]="['/lasthour']">Last Hour</a></li>
-    <li><a [routerLink]="['/settings']">Settings</a></li>
-  </ul>
+        <div *ngIf="this.plans.length == 0 && this.noPlans">
+          <div class="noPlans">
+            SORRY, THERE IS NO PLANS NOW<br>
+          </div>
+          <div class="imageEmpty">
+            <img class="emptysad" src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513212777/noPlans_seb4kn.png">
+          </div>
+        </div>
+        <!-- Confort Zone -->
+        <div *ngIf="this.typeSearch == 'Confort'">
+          <div class="col-xs-3 text-center selected selbutton">Confort</div>
+        </div>
+        <div *ngIf="this.typeSearch != 'Confort'">
+          <div class="col-xs-3 text-center selected"><button (click)="setConfort()">Confort</button></div>
+        </div>
+
+        <!-- Explore -->
+        <div *ngIf="this.typeSearch == 'Explore'">
+          <div class="col-xs-3 text-center selected selbutton">Explore</div>
+        </div>
+        <div *ngIf="this.typeSearch != 'Explore'">
+          <div class="col-xs-3 text-center selected"><button (click)="setExplore()">Explore</button></div>
+        </div>
+
+        <!-- Random -->
+        <div *ngIf="this.typeSearch == 'Random'">
+          <div class="col-xs-3 text-center selected selbutton">Random</div>
+        </div>
+        <div *ngIf="this.typeSearch != 'Random'">
+          <div class="col-xs-3 text-center selected"><button (click)="setRandom()">Random</button></div>
+        </div>
+        <!--- FlashPlans -->
+        <div class="col-xs-3 text-center selected">FlashPlans<input type="checkbox" name="rush" (change)="setRush($event)"></div>
+
+      </div>
+    </div>
+    <div class="col-xs-12 navbar-inverse navbar-fixed-bottom">
+      <div class="row" id="bottomNav">
+        <div class="col-xs-3 text-center selected"><i class="fa fa-id-badge selected" aria-hidden="true"></i><br>Plans</div>
+        <div class="col-xs-3 text-center"><a [routerLink]="['/myplans']"><i class="fa fa-list unselected" aria-hidden="true"></i></a><br></div>
+        <div class="col-xs-3 text-center"><a [routerLink]="['/mychats']"><i class="fa fa-comments-o unselected" aria-hidden="true"></i></a><br></div>
+        <div class="col-xs-3 text-center"><a [routerLink]="['/settings']"><i class="fa fa-user-circle unselected" aria-hidden="true"></i></a><br></div>
+      </div>
+    </div>
+  </div>

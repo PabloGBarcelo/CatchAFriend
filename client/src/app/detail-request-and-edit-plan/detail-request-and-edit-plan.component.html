@@ -35,21 +35,14 @@
     <button (click)="deny(request._id)">Deny</button>
   </div>
   <a [routerLink]="['/myplans']">Go back</a>
-  <ul>
-    <li><a [routerLink]="['/portal']">Plans</a></li>
-    <li class="selected">My Plans</li>
-    <li><a [routerLink]="['/mychats']">My Chats</a></li>
-    <li><a [routerLink]="['/lasthour']">Last Hour</a></li>
-    <li><a [routerLink]="['/settings']">Settings</a></li>
-  </ul>
 
   <div id="footer">
     <div class="col-xs-12 navbar-inverse navbar-fixed-bottom">
       <div class="row" id="bottomNav">
-        <div class="col-xs-3 text-center"><a href="#"><i class="glyphicon glyphicon-circle-arrow-left"></i><br>Link</a></div>
-        <div class="col-xs-3 text-center"><a href="#"><i class="glyphicon glyphicon-circle-arrow-down"></i><br>Link</a></div>
-        <div class="col-xs-3 text-center"><a href="#"><i class="glyphicon glyphicon-circle-arrow-right"></i><br>Link</a></div>
-        <div class="col-xs-3 text-center"><a href="#"><i class="glyphicon glyphicon-circle-arrow-right"></i><br>Link</a></div>
+        <div class="col-xs-3 text-center"><a [routerLink]="['/portal']"><i class="fa fa-id-badge unselected" aria-hidden="true"></i><br></a></div>
+        <div class="col-xs-3 text-center selected"><a [routerLink]="['/myplans']"><i class="fa fa-list selected" aria-hidden="true"></i></a><br>My Plans</div>
+        <div class="col-xs-3 text-center"><a [routerLink]="['/mychats']"><i class="fa fa-comments-o unselected" aria-hidden="true"></i><br></a></div>
+        <div class="col-xs-3 text-center"><a [routerLink]="['/settings']"><i class="fa fa-user-circle unselected" aria-hidden="true"></i><br></a></div>
       </div>
     </div>
   </div>

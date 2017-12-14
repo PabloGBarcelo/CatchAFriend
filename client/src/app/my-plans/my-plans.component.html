@@ -1,10 +1,17 @@
+<div class="logoHeader">
+  <img src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513114677/logoHeader_fwizao.png">
+<div class="addNewPlan">
 
-<div *ngFor="let plan of userPlans">
+</div>
+</div>
+<div class="plan" *ngFor="let plan of userPlans">
   <a [routerLink]="[plan._id]">
   <div class="image">
-    <img width="50px" [src]="plan.photo[0]">
+    <img class="imageMini" [src]="plan.photo[0]">
   </div>
+  <div class="title">
     {{ plan.title }}
+  </div>
   <div class="day">
     {{ plan.datePlan }}
   </div>
@@ -31,28 +38,13 @@
 <div class="newPlan">
   <a [routerLink]="['/createplan']">ADD NEW PLAN</a>
 </div>
-<ul>
-  <li><a [routerLink]="['/portal']">Plans</a></li>
-  <li class="selected">My Plans</li>
-  <li><a [routerLink]="['/mychats']">My Chats</a></li>
-  <li><a [routerLink]="['/lasthour']">Last Hour</a></li>
-  <li><a [routerLink]="['/settings']">Settings</a></li>
-</ul>
-<!--
-$or: [{
-  "_acceptRequest": {
-    $in: [user]
-  }
-}, {
-  "_usersRequest": {
-    $in: [user]
-  }
-}, {
-  "_rejectedId": {
-    $in: [user]
-  }
-},{
-    "_owner": {
-    $in: [user]
-  }
-}] -->
+<div id="footer">
+  <div class="col-xs-12 navbar-inverse navbar-fixed-bottom">
+    <div class="row" id="bottomNav">
+      <div class="col-xs-3 text-center"><a [routerLink]="['/portal']"><i class="fa fa-id-badge unselected" aria-hidden="true"></i></a><br></div>
+      <div class="col-xs-3 text-center selected"><i class="fa fa-list selected" aria-hidden="true"></i><br>My Plans</div>
+      <div class="col-xs-3 text-center"><a [routerLink]="['/mychats']"><i class="fa fa-comments-o unselected" aria-hidden="true"></i></a><br></div>
+      <div class="col-xs-3 text-center"><a [routerLink]="['/settings']"><i class="fa fa-user-circle unselected" aria-hidden="true"></i></a><br></div>
+    </div>
+  </div>
+</div>

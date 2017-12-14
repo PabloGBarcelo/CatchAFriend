@@ -20,8 +20,9 @@ export class MyChatsSelectedComponent implements OnInit {
     // get id plan
     this.route.params.subscribe(params => {
       this.planId = params['id'];
+      this.chat.messages=[];
       this.chat.getMessagesOfPlanIdChat(params['id']).subscribe(
-        chats => {console.log(chats);this.allHistory=chats},
+        chats => this.allHistory=chats,
         error => console.log(error)
       );
     });
@@ -32,11 +33,11 @@ export class MyChatsSelectedComponent implements OnInit {
       }, (err) => { console.log(err) });
     // Load values of chat
   }
-  sendMessage(m) {
-    if (m != "") {
+  sendMessage(data) {
+    if (data != "") {
       this.route.params.subscribe(params => {
         this.toSend['planId'] = params['id'];
-        this.toSend['message'] = m;
+        this.toSend['message'] = data;
         this.toSend['senderId'] = this.user['_id'];
         this.chat.sendMessage(this.toSend)
       });

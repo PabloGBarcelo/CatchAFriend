@@ -55,10 +55,13 @@
 <div class="closeSession">
   <button (click)="logout()">Close Session!</button>
 </div>
-<ul class="bottomMenu">
-  <li><a [routerLink]="['/portal']">Plans</a></li>
-  <li><a [routerLink]="['/myplans']">My Plans</a></li>
-  <li><a [routerLink]="['/mychats']">My Chats</a></li>
-  <li><a [routerLink]="['/lasthour']">Last Hour</a></li>
-  <li class="selected">Settings</li>
-</ul>
+<div id="footer">
+  <div class="col-xs-12 navbar-inverse navbar-fixed-bottom">
+    <div class="row" id="bottomNav">
+      <div class="col-xs-3 text-center"><a [routerLink]="['/portal']"><i class="fa fa-id-badge unselected" aria-hidden="true"></i></a><br></div>
+      <div class="col-xs-3 text-center"><a [routerLink]="['/myplans']"><i class="fa fa-list unselected" aria-hidden="true"></i></a><br></div>
+      <div class="col-xs-3 text-center"><a [routerLink]="['/mychats']"><i class="fa fa-comments-o unselected" aria-hidden="true"></i></a><br></div>
+      <div class="col-xs-3 text-center selected"><i class="fa fa-user-circle selected" aria-hidden="true"></i><br>You</div>
+    </div>
+  </div>
+</div>

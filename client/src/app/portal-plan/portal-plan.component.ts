@@ -10,7 +10,7 @@ import * as moment from 'moment';
 export class PortalPlanComponent implements OnInit {
   // constant for swipe action: left or right
   SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
-
+  noPlans:boolean = false;
   plans = [];
   x: Number = 0;
   body = {};
@@ -31,6 +31,7 @@ export class PortalPlanComponent implements OnInit {
 
   ngOnInit() {
     // Get all info data.
+    this.noPlans = false;
     if (typeof(this.plans) === "undefined" || this.plans.length == 0){
     console.log("Entre");
       this.takePlans();
@@ -38,6 +39,7 @@ export class PortalPlanComponent implements OnInit {
   }
 
   takePlans(){
+    this.noPlans = false;
     this.auth.isLoggedIn().subscribe(
       (user) => {
         this.idUser = user['_id'];
@@ -54,6 +56,8 @@ export class PortalPlanComponent implements OnInit {
         this.planService.getPlans(this.body).subscribe(listOfPlans => {
           console.log(listOfPlans);
           console.log("Asignando");
+          if (this.plans.length == 0)
+            this.noPlans = true;
           this.plans = listOfPlans;
         });
       }),

@@ -1,0 +1,37 @@
+.logoHeader{
+  margin: 0 auto;
+  text-align: center;
+  padding: 10px;
+}
+
+.navbar-inverse {
+  background-color: #fff;
+  padding-bottom: 10px;
+  padding-top: 5px;
+}
+
+.unselected {
+    font-size: 24px;
+    margin-top: 6px;
+    color: gray;
+}
+
+.selected {
+    color: #f25850;
+    font-size: 15px;
+    font-weight: 300;
+    margin-bottom: 3px;
+}
+
+.messageClass {
+    border: 1px solid gainsboro;
+    border-radius: 5px;
+    width: 70%;
+}
+.boxMessage {
+    margin: 0 auto;
+    text-align: center;
+}
+.boxMes{
+  bottom:66px;
+}
