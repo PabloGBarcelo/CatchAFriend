@@ -2,7 +2,7 @@ const passport = require('passport');
 
 require('./serializers');
 require('./localStrategy');
-require ('./FacebookStrategy');
+require ('./facebookStrategy');
 require ('./oauth');
 module.exports = (app)  => {
   app.use(passport.initialize());
