@@ -13,6 +13,7 @@ export class MyChatsComponent implements OnInit {
   toSend:object={};
   user:object;
   chatsUser;
+
   constructor(private chatService:ChatService, private router:Router, private route: ActivatedRoute, private auth:AuthService ) { }
 
   ngOnInit() {

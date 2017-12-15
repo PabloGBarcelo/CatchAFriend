@@ -32,7 +32,8 @@ export class ChatService {
             this.messages.push({
             sender: data.sender,
             message:data.message,
-            planId: data.planId
+            planId: data.planId,
+            nickname: data.nickname
           })
 
     }.bind(this));
@@ -46,6 +47,7 @@ export class ChatService {
         (msg) => {
           console.log("DENTRO")
           console.log(msg);
+          data['userId']="Me";
     this.messages.push(data)
       },
     (err) => {

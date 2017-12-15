@@ -293,7 +293,10 @@ Routes.delete('/plan/:id', (req, res, next) => { // CHECKED
 });
 
 // When somebody make like
-Routes.post('/plan/:planId/like/:userId', (req, res, next) => { // CHECKED
+Routes.post('/plan/:planId/like/:userId', (req, res, next) => {
+  let categoryToAdd = []; // CHECKED
+  let userCategory;
+  console.log("ENTRO");
   Plan.findOneAndUpdate({
       "_id": req.params.planId,
       "_usersRequest": {
@@ -319,14 +322,39 @@ Routes.post('/plan/:planId/like/:userId', (req, res, next) => { // CHECKED
           message: 'Plan executed in the past'
         });
       else{
+        console.log("Hello?");
         Plan.findById(req.params.planId)
             .populate("_owner")
             .then(result => {
               console.log(result);
               // Send email to user
+              User.findById(req.params.userId)
+                  .then(user =>{
+                    userCategory = user._liking.map(a => a.categorie.str);
+                    result._category.forEach(e => {
+                      if(!userCategory.includes(e)){
+                        console.log(userCategory,e);
+                        categoryToAdd.push({
+                          categorie:e,
+                          rate:1
+                        });
+                      };
+                    });
+                  }).then(() => {
+                    console.log("categoryToAdd");
+                    console.log(categoryToAdd);
+                    if(categoryToAdd.length > 0){
+                        User.findByIdAndUpdate(req.params.userId,
+                          {$push:{ "_liking":{ $each:categoryToAdd }
+                        }}).catch(errr => console.log(err));
+                    }
+                  })
+                  .catch(e => console.log(e));
               sendEmail(result._owner[0].email,'You have a new request in CatchAFriend ✔!');
             })
             .catch(e => console.log(e));
+
+
         res.status(200).json("Plan Liked");
     }})
     .catch(err => res.status(500).json({
@@ -479,7 +507,6 @@ Routes.post('/uploadPhoto', parser.single('image'), (req, res, next) => {
 sendEmail = function(userEmail,subject) {
   console.log(userEmail);
   if (typeof(userEmail) != "undefined") {
-    console.log('Hello!');
     nodemailer.createTestAccount((err, account) => {
 
       // create reusable transporter object using the default SMTP transport

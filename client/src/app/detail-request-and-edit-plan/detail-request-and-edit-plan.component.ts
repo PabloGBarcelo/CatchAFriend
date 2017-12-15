@@ -9,22 +9,21 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class DetailRequestAndEditPlanComponent implements OnInit {
   myPlan;
+  circleRed = false;
   constructor(public plan:PlanService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.plan.getPlan(params['id']).subscribe(
-        plan => {
-          console.log(plan);
-          this.myPlan = plan;
-        }
-      );
-    });
+    this.reloadPlans();
+    console.log(this.myPlan);
   }
   agree(m){
     // this.myPlan, m => userId
     this.plan.acceptPlan(m,this.myPlan['_id'],this.myPlan['_owner']).subscribe(
-    accepted => console.log(accepted),
+    accepted => {
+      console.log(accepted);
+      this.reloadPlans();
+      this.circleRed = true;
+    },
     error => console.log(error)
   );
   }
@@ -33,5 +32,16 @@ export class DetailRequestAndEditPlanComponent implements OnInit {
       deny => console.log(deny),
       error => console.log(error)
     )
+  }
+
+  reloadPlans(){
+    this.route.params.subscribe(params => {
+      this.plan.getPlan(params['id']).subscribe(
+        plan => {
+          console.log(plan);
+          this.myPlan = plan;
+        }
+      );
+    });
   }
 }

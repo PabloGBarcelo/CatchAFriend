@@ -12,7 +12,8 @@ module.exports = (app) => {
         sender: socket.id,
         message: data.message,
         planId: data.planId,
-        senderId: data.senderId
+        senderId: data.senderId,
+        nickname: data.nickname
       });
     });
   });

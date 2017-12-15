@@ -20,7 +20,7 @@
         </div>
       </div>
     </a>
-    <div class="kingdivcontainer" *ngIf="plan._owner == user._id">
+    <div class="kingdivcontainer" *ngIf="plan._owner == user._id && !plan._acceptRequest.includes(user._id)">
       <div class="kingdiv" *ngIf="plan._usersRequest.length == 0">
         <img class="king" src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513249123/king_iasrgq.png">
       </div>

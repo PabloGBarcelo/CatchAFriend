@@ -21,8 +21,11 @@
         </div>
     </div>
     <div *ngFor="let m of chat.messages">
-      <li class="me" *ngIf="m.planId == planId">
+      <li class="me" *ngIf="m.planId == planId && m.userId=='Me'">
         <b>{{m.userId}}</b>: {{m.message}}
+      </li>
+      <li class="him" *ngIf="m.planId == planId && m.userId!='Me'">
+        <b>{{m.nickname}}</b>: {{m.message}}
       </li>
     </div>
   </ul>
@@ -31,7 +34,7 @@
     <div class="row" id="bottomNav">
       <div class="boxMessage">
         <input class="messageClass" type="text" [(ngModel)]="m">
-        <button (click)="sendMessage(m)"> Send </button>
+        <button (click)="sendMessage(m); m=''"> Send </button>
       </div>
     </div>
   </div>

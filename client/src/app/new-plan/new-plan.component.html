@@ -1,50 +1,70 @@
-<label> Title - Be clear!</label>
-<div class="titlePlan">
-  <input type="text" name="title" [(ngModel)]="plan.title">
+<div class="logoHeader">
+  <img src="http://res.cloudinary.com/dvm5v31jc/image/upload/v1513114677/logoHeader_fwizao.png">
 </div>
-
+<div class="AddAPlan">
+  CREATE YOUR PLAN!
+</div>
+<div class="titlePlan">
+  <input class="titleinput" type="text" name="title" [(ngModel)]="plan.title" placeholder="TITLE">
+</div>
 <div class="descriptionPlan">
-  Description (describe your plan!)
-  <textarea style="border:1px solid black" [(ngModel)]='plan.description' rows="10" cols="50" placeholder="Tell your plan as better as possible :)">
+  <div class="descriptionTitle">
+    Description (describe your plan!)
+  </div>
+  <div class="textareaDiv">
+  <textarea class="textAreaInput" [(ngModel)]='plan.description' placeholder="Tell your plan as better as possible :)">
   </textarea>
+</div>
 </div>
 
 <div class="dayHour">
-  Day and Hour
-  <div class="ui-g-12 ui-md-4">
-    <h3>Time</h3>
-  <p-calendar [(ngModel)]="plan.datePlan" [showTime]="true"></p-calendar>
+  <div class="ui-g-12 ui-md-4 time">
+    <div class="plantime">
+      When is the plan?
+    </div>
+    <div class="calendar">
+      <p-calendar class="calendar" [(ngModel)]="plan.datePlan" [showTime]="true"></p-calendar>
+    </div>
 </div>
 </div>
 
 <div class="genderPlan">
-  <label> Which gender of company search?</label><br>
-  <input type="radio" name="gender" [(ngModel)]="plan.gender_allowed" value="both">Both
-  <input type="radio" name="gender" [(ngModel)]="plan.gender_allowed" value="female">Female
-  <input type="radio" name="gender" [(ngModel)]="plan.gender_allowed" value="male">Male
+  <div class="titleGender">
+    Which gender of company search?
+  </div>
+  <div class="radioGender">
+    <input class="buttonRadio" type="radio" name="gender" [(ngModel)]="plan.gender_allowed" value="both"><span class="option">Both</span>
+    <input class="buttonRadio" type="radio" name="gender" [(ngModel)]="plan.gender_allowed" value="female"><span class="option">Female</span>
+    <input class="buttonRadio" type="radio" name="gender" [(ngModel)]="plan.gender_allowed" value="male"><span class="option">Male</span>
+  </div>
 </div>
 
 <div class="zonePlan">
-  Zone:
-  <input type="radio" name="zone" [(ngModel)]="plan.zone" value="plan">plan
-  <input type="radio" name="zone" [(ngModel)]="plan.zone" value="relation">relation
-  <input type="radio" name="zone" [(ngModel)]="plan.zone" value="rush">flashplan
+  <div class="zone">
+    Kind of plan?
+  </div>
+  <input class="buttonRadio" type="radio" name="zone" [(ngModel)]="plan.zone" value="plan"><span class="option">Plan</span>
+  <input class="buttonRadio" type="radio" name="zone" [(ngModel)]="plan.zone" value="relation"><span class="option">Relation</span>
+  <input class="buttonRadio" type="radio" name="zone" [(ngModel)]="plan.zone" value="rush"><span class="option">Flashplan</span>
 </div>
 
 <div class="photoPlan">
-  Photo because a image is better than 1000 words:
+  <div class="phototext">
+    Select a Photo!
+  </div>
   <image-upload url="{{ imageUploadDirection }}"
    [max]="10"
    [extensions]="['jpeg','png']"
    [buttonCaption]="'Select Images!'"
-   [dropBoxMessage]="'Drop your images here!'"
    [class]="'customClass'"
    (uploadFinished)="onUploadFinished($event)"
    (removed)="onRemoved($event)">
  </image-upload>
 </div>
 <div class="street">
-  Where will be the plan?
+  <div class="streetText">
+    Where will be the plan?
+  </div>
   <div class="form-group">
     <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
   </div>
@@ -54,30 +74,49 @@ _owner is putted in the Back
 status is positioned in back (running)
 -->
 <div class="moneyPlan">
-  Have to pay something? (if yes, say in description ;) )
-  <input type="number" step="0.01" name="money" [(ngModel)]="plan.money">
+  <div class="textMoney">
+    Have to pay something?
+  </div>
+  <div class="moneyInput">
+    <input class="money" type="number" step="0.01" name="money" [(ngModel)]="plan.money">
+  </div>
 </div>
 
 <div class="transportPlan">
-  Do you have any preference in transport?
-  <input type="radio" name="transport" [(ngModel)]="plan.transport" value="We Stay There">We Stay There :)
-  <input type="radio" name="transport" [(ngModel)]="plan.transport" value="You get me?">Can you pick me?
-  <input type="radio" name="transport" [(ngModel)]="plan.transport" value="Take You!">I pick you!
+  <div class="transportText">
+    Where about transport?
+</div>
+<div class="transportType">
+  <input class="buttonRadio transport" type="radio" name="transport" [(ngModel)]="plan.transport" value="We Stay There"><span class="transporTextRadio">We Stay There :)</span><br>
+  <input class="buttonRadio transport" type="radio" name="transport" [(ngModel)]="plan.transport" value="You get me?"><span class="transporTextRadio">Can you pick me?</span><br>
+  <input class="buttonRadio transport" type="radio" name="transport" [(ngModel)]="plan.transport" value="Take You!"><span class="transporTextRadio">I pick you!</span><br>
+</div>
 </div>
 
 <div class="maxPeople">
-  How many persons you search ? Check it!
-  <input type="number" step="1" min="1" name="maxPeople" [(ngModel)]="plan.maxPeople" value="1">
+<div class="manyPeople">
+  How many people?
 </div>
-Select your categorie!
-<form #myForm="ngForm" (submit)="sendPlan(myForm)">
+<div class="numberPeople">
+  <input class="howManyPeople" type="number" step="1" min="1" name="maxPeople" [(ngModel)]="plan.maxPeople" value="1">
+</div>
+</div>
+<div class="categories">
+  Select your categories!
+</div>
+<form class="categoriesFields" #myForm="ngForm" (submit)="sendPlan(myForm)">
   <div *ngFor="let categorie of allCategories">
+    <div class="categoriesDiv">
     <label>
-          <input type="checkbox" name="{{ categorie._id }}" value="{{ categorie._id }}" ngModel/>
+          <input class="categorieSelect" type="checkbox" name="{{ categorie._id }}" value="{{ categorie._id }}" ngModel/>
           {{ categorie.name }}
       </label>
+    </div>
   </div>
-  <button type="submit">JUMP TO THE WORLD!</button>
+  <div class="buttonSendPlan">
+    <button class="buttonJumpToTheWorld" type="submit">SEND MY PLAN!</button>
+  </div>
 </form>
-
-<a [routerLink]="['/myplans']">Go back</a>
+<div class="goback">
+  <a [routerLink]="['/portal']">Cancel plan :(</a>
+</div>

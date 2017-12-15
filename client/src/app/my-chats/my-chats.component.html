@@ -12,7 +12,7 @@
         {{ chats.planId.title}}
       </div>
       <div class="date">
-        Last message: | truncate : 3
+        {{ chats.planId.datePlan | amDateFormat: 'DD-MM-YYYY'}}
       </div>
     </div>
   </a>

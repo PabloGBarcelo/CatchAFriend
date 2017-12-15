@@ -45,6 +45,7 @@ export class MyChatsSelectedComponent implements OnInit {
         this.toSend['planId'] = params['id'];
         this.toSend['message'] = data;
         this.toSend['senderId'] = this.user['_id'];
+        this.toSend['nickname'] = this.user.nickname;
         this.chat.sendMessage(this.toSend)
       });
     }

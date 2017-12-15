@@ -1,6 +1,7 @@
 .navbar-inverse {
   background-color: #fff;
-  margin-bottom: 10px;
+  padding-bottom: 10px;
+  padding-top: 5px;
 }
 
 .unselected {
@@ -19,4 +20,288 @@
 button {
     background: none;
     border: none;
+}
+
+.logoHeader{
+  margin: 0 auto;
+  text-align: center;
+  padding: 10px;
+}
+
+button {
+    background: none;
+    border: none;
+}
+
+.iconCalendar > img {
+    width: 30px;
+}
+
+.iconCalendar {
+    display: inline-block;
+    width: 12%;
+    padding: 4px;
+    margin-left: 4px;
+}
+
+.dataDate {
+  display: inline-block;
+  width: 43%;
+  color: white;
+  font-size: 17px;
+  vertical-align: middle;
+}
+
+.dataHeader {
+    background: #F25850;
+    border-bottom: 1px solid white;
+}
+
+.iconPeople{
+  width: 20px;
+  margin-right: 5px;
+}
+
+.numberPeople {
+  display: inline-block;
+  width: 30%;
+  font-size: 20px;
+  vertical-align: middle;
+  color: white;
+  margin-left: 30px;
+  text-align: right;
+  font-weight: 200;
+}
+
+.title {
+  color: white;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 4px;
+  font-size: 16px;
+  font-weight: 300;
+  background: #f25850b5;
+}
+
+.owner > img {
+    border-radius: 50%;
+    width: 50px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.infoUser {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+    font-weight: 400;
+    margin-top: 4px;
+}
+
+.geolocationIcon {
+    width: 24px;
+  }
+
+.nickname {
+    text-align: right;
+    font-weight: 500;
+}
+
+.street {
+  display: inline-block;
+  text-align: right;
+  width: 45%;
+  vertical-align: middle;
+  font-weight: 500;
+}
+
+.owner {
+    width: 45%;
+    display: inline-block;
+}
+
+.iconPosition {
+    display: inline-block;
+}
+
+.imageGeo {
+    display: inline-block;
+    width: 26px;
+}
+
+.descStreet {
+    display: inline-block;
+}
+
+.years {
+    font-size: 11px;
+}
+
+.description {
+    padding: 20px 20px 0 20px;
+    min-height: 100px;
+    max-height: 100px;
+    overflow-y: hidden;
+}
+
+
+.unselected {
+    font-size: 24px;
+    margin-top: 6px;
+    color: gray;
+}
+
+.selected {
+    color: #f25850;
+    font-size: 15px;
+    font-weight: 300;
+    margin-bottom: 3px;
+}
+
+.secondary {
+    bottom: 45px;
+}
+
+.third {
+    bottom: 100px;
+}
+.selbutton {
+    color: white !important;
+    background: #F25850;
+    border-radius: 25px;
+    padding: 3px;
+}
+
+.imageEmpty > img {
+    width: 100%;
+}
+
+.noPlans {
+    margin: 0 auto;
+    text-align: center;
+    font-size: 25px;
+    margin-top: 50px;
+    font-weight: 100;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.photoPlan {
+    max-height: 200px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.photoPlan > img {
+    text-align: center;
+    width: 375px;
+}
+
+.car {
+    display: inline-block;
+    width: 36px;
+}
+
+.Place {
+    margin: 0;
+    padding: 0;
+    text-align: right;
+}
+
+.transport {
+    display: inline-block;
+}
+
+.iconMoney {
+    width: 35px;
+    display: inline-block;
+    text-align: right;
+}
+
+.price {
+    display: inline-block;
+    width: 80px;
+    text-align: left;
+    margin-left: 10px;
+}
+
+.infoAllPlan {
+    padding: 10px;
+}
+.addPlan {
+    display: inline-block;
+    float: right;
+  }
+
+.addPlan > img{
+  width: 27px;
+}
+
+.imageAddTop {
+    position: absolute;
+    right: 13px;
+    width: 30px;
+}
+
+.userPhoto {
+    width: 100%;
+}
+
+.photoUser {
+    width: 110px;
+    display: inline-block;
+}
+
+.userName {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 400;
+    width: 85px;
+    margin-left: 10px;
+}
+
+.Accept {
+    display: inline-block;
+    padding: 17px 7px 17px 7px;
+    background: #00a200b0;
+    color: white;
+    border: 1px solid green;
+    border-radius: 50% 20% 50% 50%;
+}
+
+.Deny{
+    display: inline-block;
+    padding: 16px 6px 16px 6px;
+    background: #d30000a1;
+    color: white;
+    border: 1px solid #a4000087;
+    border-radius: 20% 50% 50% 50%;
+    margin-left: 20px;
+}
+
+.allpetitions {
+    border-bottom: 1px solid gainsboro;
+}
+
+.containerAllPetitions{
+  margin-bottom: 100px;
+}
+
+.circleRed {
+    position: absolute;
+    left: 34px;
+}
+
+img.kawaiigirl {
+    width: 300px;
+}
+
+.kawaiiGirl {
+    text-align: center;
+}
+
+.textKawaii {
+    margin-top: 30px;
+    font-size: 25px;
+    font-weight: 100;
 }
