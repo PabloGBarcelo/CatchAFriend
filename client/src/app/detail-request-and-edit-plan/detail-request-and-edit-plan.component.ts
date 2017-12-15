@@ -28,8 +28,9 @@ export class DetailRequestAndEditPlanComponent implements OnInit {
   );
   }
   deny(m){
-    this.plan.cancelPlan(m,this.myPlan['_id']).subscribe(
-      deny => console.log(deny),
+    this.plan.rejectPlan(m,this.myPlan['_id']).subscribe(
+      deny => {console.log(deny),
+            this.reloadPlans();},
       error => console.log(error)
     )
   }

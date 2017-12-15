@@ -3,7 +3,7 @@
 </div>
 <div *ngIf="this.user">
   <div class="phototop">
-    <span>Member since {{ this.user.createdAt }}</span>
+    <span>Member Bronce!</span>
     <img class="photoCircle"[src]="user.photoUrl[0]">
   </div>
   <div class="welcome">
@@ -32,6 +32,7 @@
     <div class="kilometerstag">
       Kilometers ({{ this.rangeKilometers }}):
     </div>
+
     <div class="rangeinput">
       <input type="range" #range (input)="updateKilometers(range.value)" min="10" max="300" [value]="user.maxKilometers">
     </div>

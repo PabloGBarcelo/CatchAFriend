@@ -55,6 +55,12 @@ export class PlanService {
                     .catch(this.handleError);
   }
 
+  rejectPlan(userId,planId){
+    return this.http.post(`${BASE_URL}/plan/${planId}/reject/${userId}`,{},this.options)
+                    .map(res => res.json())
+                    .catch(this.handleError);
+  }
+
   cancelPlan(userId,planId){
     return this.http.post(`${BASE_URL}/plan/${planId}/cancel/${userId}`,{},this.options)
                     .map(res => res.json())

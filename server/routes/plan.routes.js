@@ -426,6 +426,34 @@ Routes.post('/plan/:planId/cancel/:userId', (req, res, next) => {
     }));
 });
 
+Routes.post('/plan/:planId/reject/:userId', (req, res, next) => {
+  console.log("Entre");
+  Plan.findOneAndUpdate({
+      "_id": req.params.planId,
+      "_usersRequest": req.params.userId
+    }, {
+      $push: {
+        "_rejectedId": req.params.userId
+      },
+      $pull: {
+        "_usersRequest": req.params.userId
+      }
+    }, {
+      new: true
+    })
+    .then(planAccepted => {
+      if (!planAccepted)
+        res.status(500).json({
+          message: 'No plan for Accept'
+        });
+      else
+        res.status(200).json(planAccepted);
+    })
+    .catch(err => res.status(500).json({
+      message: 'Error Rejecting plan'
+    }));
+});
+
 // When a user accept a plan
 Routes.post('/plan/:planId/accept/:userId', (req, res, next) => { // CHECKED
   Plan.findOneAndUpdate({
