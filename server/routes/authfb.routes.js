@@ -5,7 +5,6 @@ const bcrypt = require('bcrypt');
 const User = require('../models/User.model');
 const Routes = express.Router();
 
-// Facebook auth routes
 Routes.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
 
 Routes.get('/auth/facebook/callback',

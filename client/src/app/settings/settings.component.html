@@ -32,10 +32,9 @@
     <div class="kilometerstag">
       Kilometers ({{ this.rangeKilometers }}):
     </div>
-
-    <div class="rangeinput">
-      <input type="range" #range (input)="updateKilometers(range.value)" min="10" max="300" [value]="user.maxKilometers">
-    </div>
+      <div class="emailinput">
+      <input class="center" type="text" value="{{ user.maxKilometers }}">
+  </div>
       <div class="buttons">
         <div class="acceptChanges">
           <button type="submit">Save profile</button>

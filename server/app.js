@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('./config/db.config');
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
@@ -12,27 +13,7 @@ const cors = require('cors');
 const app = express();
 
 // Routes
-const categories = require('./routes/categories.routes');
-const auth = require('./routes/auth.routes');
-const chat = require('./routes/chat.routes');
-const plan = require('./routes/plan.routes');
-const user = require('./routes/user.routes');
-const fblogin = require('./routes/authfb.routes');
-mongoose.connect(process.env.DBURL).then(() =>{
-  console.log(`Connected to DB: ${process.env.DBURL}`);
-}).catch(err => console.log(err));
-
-var whitelist = [
-    'http://localhost:4200',
-    'http://www.facebook.com'
-];
-var corsOptions = {
-    origin: function(origin, callback){
-        var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
-        callback(null, originIsWhitelisted);
-    },
-    credentials: true
-};
+const corsOptions = require('./config/cors.config');
 app.use(cors(corsOptions));
 
 // view engine setup
@@ -58,12 +39,7 @@ app.use(session({
 require('./passport')(app);
 
 // Routes
-app.use('/api', auth);
-app.use('/api', categories);
-app.use('/api', chat);
-app.use('/api', plan);
-app.use('/api', user);
-app.use('/', fblogin);
+require('./config/routes.config')(app);
 
 app.use(function(req,res){
   res.sendfile(__dirname + '/public/index.html');
